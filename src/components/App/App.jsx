@@ -1,4 +1,22 @@
 import { Routes, Route } from 'react-router-dom';
+import Header from './Header';
+import Register from './Register';
+import Login from './Login';
+import Main from './Main';
+import Promo from './Promo';
+import AboutProject from './AboutProject';
+import Techs from './Techs';
+import AboutMe from './AboutMe';
+import Portfolio from './Portfolio';
+import Footer from './Footer';
+import Movies from './Movies';
+import MoviesCard from './MoviesCard';
+import MoviesCardList from './MoviesCardList';
+import Navigation from './Navigation';
+import Preloader from './Preloader';
+import Profile from './Profile';
+import SavedMovies from './SavedMovies';
+import SearchForm from './SearchForm';
 
 function App() {
   return (
