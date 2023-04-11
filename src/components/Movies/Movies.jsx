@@ -1,7 +1,7 @@
-import SearchForm from './SearchForm';
-import MoviesCardList from './MoviesCardList';
-// import MoviesCard from './MoviesCard';
-// import Preloader from './Preloader';
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+// import MoviesCard from '../MoviesCard/MoviesCard';
+// import Preloader from '../Preloader/Preloader';
 
 function Movies() {
   return (

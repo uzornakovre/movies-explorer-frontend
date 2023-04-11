@@ -1,5 +1,5 @@
-import MoviesCardList from './MoviesCardList';
-// import MoviesCard from './MoviesCard';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+// import MoviesCard from '../MoviesCard/MoviesCard';
 
 function SavedMovies() {
   return (
