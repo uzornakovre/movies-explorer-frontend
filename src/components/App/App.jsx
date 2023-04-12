@@ -10,46 +10,46 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 
 function App() {
   return (
-    <div className="page__content">
+    <div className="app">
       <Routes>
         <Route path="/" element={
           <>
-            <Header />
+            <Header page="main"/>
             <Main />
             <Footer />
           </>
         }/>
         <Route path="/movies" element={
           <>
-            <Header />
+            <Header page="movies"/>
             <Movies />
             <Footer />
           </>
         }/>
         <Route path="/saved-movies" element={
           <>
-            <Header />
+            <Header page="saved-movies"/>
             <SavedMovies />
             <Footer />
           </>
         }/>
         <Route path="/profile" element={
           <>
-            <Header />
+            <Header page="profile"/>
             <Profile />
             <Footer />
           </>
         }/>
         <Route path="/signin" element={
           <>
-            <Header />
+            <Header page="signin"/>
             <Login />
             <Footer />
           </>
         }/>
         <Route path="/signup" element={
           <>
-            <Header />
+            <Header page="signup"/>
             <Register />
             <Footer />
           </>

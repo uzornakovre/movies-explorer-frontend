@@ -1,0 +1,89 @@
+.navigation {
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+
+  &__menu {
+    margin: 0;
+    display: flex;
+    list-style: none;
+    padding: 0;
+
+    &_type_account {
+      gap: 30px;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 1.33;
+    }
+    
+    &_type_movies {
+      gap: 20px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.29;
+    }
+
+  }
+
+  &__button {
+    font-weight: inherit;
+    padding: 0;
+    min-height: 32px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+
+    &_active {
+      font-weight: 500;
+    }
+
+    &_type_account {
+      font-size: 14px;
+      gap: 17px;
+    }
+
+    &_type_login {
+      min-width: 76px;
+      background-color: #3456F3;
+      color: #FFF;
+      border-radius: 3px;
+      justify-content: center;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      &:active {
+        opacity: .6;
+      }
+    }
+  }
+
+  &__button-text {
+    margin: 0;
+  }
+
+  &__account-logo {
+    width: 26px;
+    height: 30px;
+    background-image: url('../../images/account.svg');
+    background-color: #F4F4F4;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+  }
+}
