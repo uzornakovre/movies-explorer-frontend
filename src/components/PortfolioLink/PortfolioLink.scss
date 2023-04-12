@@ -1,0 +1,35 @@
+.portfolio-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 2;
+  letter-spacing: -0.04em;
+  color: #000;
+  margin: 5px 0 12px;
+  transition: color .2s linear;
+
+  &:hover {
+    color: #3456F3;
+  }
+
+  &:active {
+    color: rgba(52, 86, 243, .7);
+  }
+  
+  &:not(:last-child) {
+    border-bottom: 1px solid #E8E8E8;
+  }
+
+  &__name {
+    margin: inherit;
+  }
+
+  &__arrow {
+    margin: inherit;
+    position: relative;
+    top: 5px;
+  }
+}
