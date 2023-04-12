@@ -1,0 +1,53 @@
+.promo {
+  margin: 0 auto;
+  background-color: #DDDEE3;
+
+  &__content {
+    max-width: calc(1280px - 70px * 2);
+    padding: 75px 70px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(300px, 640px) auto;
+    justify-content: space-between;
+    row-gap: 84px;
+  }
+
+  &__heading-title {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    margin: 0;
+    margin-bottom: 36px
+  }
+
+  &__heading-subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    max-width: 310px;
+    margin: 0;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+  }
+
+  &__button {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    padding: 0;
+    min-width: 129px;
+    min-height: 36px;
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, .6);
+    border-radius: 3px;
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    width: 310px;
+    height: 304px;
+  }
+}
