@@ -44,6 +44,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: opacity .2s linear;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: .5;
+    }
   }
 
   &__image {
