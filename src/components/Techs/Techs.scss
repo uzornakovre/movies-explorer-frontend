@@ -66,5 +66,10 @@
     min-height: 60px;
     background-color: #E8E8E8;
     border-radius: 10px;
+    transition: background-color .2s linear;
+
+    &:hover {
+      background-color: #d3caca;
+    }
   }
 }
