@@ -43,5 +43,14 @@
   &__link {
     text-decoration: none;
     color: inherit;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: .5;
+    }
   }
 }
