@@ -7,7 +7,7 @@ function SavedMovies() {
   return (
     <>
       <Header page="saved-movies" />
-      <MoviesCardList />
+      <MoviesCardList page="saved-movies"/>
       <Footer />
     </>
   )

@@ -1,8 +1,9 @@
 import testImage from '../../images/test_image.jpg';
 import checkMark from '../../images/check_mark.svg';
+import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
 
-function MoviesCard() {
+function MoviesCard({ page }) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
 
@@ -13,9 +14,18 @@ function MoviesCard() {
   }
 
   useEffect(() => {
-    if (isMovieSaved) {
-      setButtonContent(<img src={checkMark} alt="Фильм добавлен" />)
-    } else setButtonContent('Сохранить');
+    if (page === 'movies') {
+      if (isMovieSaved) {
+        setButtonContent(<img src={checkMark} alt="Фильм добавлен" />)
+      } else setButtonContent('Сохранить');
+    }
+    if (page === 'saved-movies') {
+      if (isMovieSaved) {
+        setButtonContent(<img src={removeIcon} alt="Фильм добавлен" />)
+      } else setButtonContent('Сохранить');
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMovieSaved, buttonContent]);
 
   return (
@@ -26,7 +36,7 @@ function MoviesCard() {
       </div>
       <img className="movies-card__image" src={testImage} alt="Здесь будет описание карточки" />
       <div className="movies-card__caption">
-        <button className={`movies-card__save-button ${isMovieSaved && "movies-card__save-button_active"}`}
+        <button className={`movies-card__save-button ${(isMovieSaved && page === "movies") && "movies-card__save-button_active"}`}
                 type="button"
                 onClick={handleSaveClick}>{buttonContent}</button>
       </div>

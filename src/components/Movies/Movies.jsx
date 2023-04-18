@@ -11,7 +11,7 @@ function Movies() {
     <>
       <Header page="movies" />
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList page="movies" />
       <Footer />
     </>
   )

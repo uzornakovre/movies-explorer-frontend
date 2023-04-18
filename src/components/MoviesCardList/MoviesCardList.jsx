@@ -1,6 +1,6 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ page }) {
   // const MoviesCardElements = MoviesCards.map(moviesCard => (
   //   <li key={moviesCard._id}>
   //     <MoviesCard card={moviesCard} />
@@ -10,18 +10,18 @@ function MoviesCardList() {
   return (
     <section className="movies" aria-label="Фильмы">
       <ul className="movies__list">
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
-        <li><MoviesCard /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
+        <li><MoviesCard page={page} /></li>
       </ul>
       <button className="movies__load-more" type="button">Ещё</button>
     </section>
