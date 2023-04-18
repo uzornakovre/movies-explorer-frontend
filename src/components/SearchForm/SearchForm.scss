@@ -1,0 +1,129 @@
+.search-form {
+  position: relative;
+  max-width: calc(1280px - 70px * 2);
+  padding: 80px 70px 0;
+  margin: 0 auto 10px;
+
+  &__form {
+    display: grid;
+    grid-template-columns: auto min-content;
+    gap: 41px;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 83px;
+    border-bottom: 1px solid rgba(170, 170, 170, .2);
+  }
+
+  &__main {
+    position: relative;
+    display: flex;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  &__input {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.29;
+    width: inherit;
+    height: calc(48px - 1.5px * 2);
+    margin: 0;
+    padding: 0;
+    padding-left: 22px;
+    padding-right: 82px;
+    border: 1.5px solid rgba(170, 170, 170, .2);
+    border-radius: 50px;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #A0A0A0;
+    }
+  }
+
+  &__submit {
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    transform: translateY(-50%);
+    min-width: 58.65px;
+    min-height: 34px;
+    border-radius: 38px;
+    background-color: #3456F3;
+    border: none;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFF;
+    cursor: pointer;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+  }
+
+  &__filter {
+    border: none;
+    margin: 0;
+    padding: 0;
+    min-width: 167px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #000000;
+    align-self: center;
+  }
+
+  &__filter-item {
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #FFF;
+      right: calc(-14px + (-34px) + 22px);
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all .2s linear;
+    }
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 34px;
+      height: 14px;
+      border-radius: 20px;
+      background-color: #EBEBEB;
+      right: calc(-14px + (-34px));
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all .2s linear;
+    }
+  }
+
+  &__filter-checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:checked + .search-form__filter-item::before {
+      background-color: #2BE080;
+    }
+
+    &:checked + .search-form__filter-item::after {
+      background-color: #F5F5F5;
+      right: calc(-14px + (-34px) + 2px);
+    }
+  }
+}
