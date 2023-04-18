@@ -1,0 +1,44 @@
+.movies {
+  max-width: calc(1280px - 70px * 2);
+  padding: 58px 70px 80px;
+  margin: 0 auto;
+  background-color: #FAFAFA;
+
+  &__list {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 360px));
+    row-gap: 31px;
+    column-gap: 28px;
+    justify-content: center;
+    justify-items: stretch;
+    align-items: stretch;
+  }
+
+  &__load-more {
+    z-index: 2;
+    margin-top: 50px;
+    width: 100%;
+    min-height: 36px;
+    background-color: #F4F4F4;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #000;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+  }
+}
