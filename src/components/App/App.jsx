@@ -5,6 +5,7 @@ import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/profile" element={<Profile />}/>
         <Route path="/signin" element={<Login />}/>
         <Route path="/signup" element={<Register />}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
