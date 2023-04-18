@@ -1,0 +1,99 @@
+.auth {
+  max-width: 396px;
+  margin: 70px auto 0;
+
+  &__title {
+    margin: 36px 0 40px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  &__form-fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  &__form-label {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #A0A0A0;
+  }
+
+  &__form-input {
+    border: none;
+    border-bottom: 1px solid #E8E8E8;
+    background-color: transparent;
+    transition: all .2s linear;
+    padding: 5px 0 9px;
+
+    &:focus {
+      outline: none;
+      border-color: #3456F3;
+    }
+  }
+
+  &__form-input-error {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin: 6px 0;
+  }
+
+  &__submit {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    width: 100%;
+    min-height: 45px;
+    background-color: #3456F3;
+    color: #FFF;
+    border-radius: 3px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    &_type_signup {
+      margin-top: 128px;
+    }
+    &_type_signin {
+      margin-top: 197px;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+  }
+
+  &__tip {
+    margin: 16px auto;
+    text-align: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+  }
+
+  &__link {
+    color: #3456F3;
+    text-decoration: none;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: .5;
+    }
+  }
+}

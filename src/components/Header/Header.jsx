@@ -4,7 +4,7 @@ function Header({ page }) {
   return (
     <header className={`header header_page_${page}`}>
       <div className="header__content">
-      <svg className ="header__logo" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+      <svg className="logo logo_place_header" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 12.6667C0 8.23292 0 6.01604 0.862865 4.32258C1.62186 2.83296 2.83296 1.62186 4.32258 
         0.862865C6.01604 0 8.23292 0 12.6667 0H25.3333C29.7671 0 31.984 0 33.6774 0.862865C35.167 1.62186 
         36.3781 2.83296 37.1371 4.32258C38 6.01604 38 8.23292 38 12.6667V25.3333C38 29.7671 38 31.984 37.1371 

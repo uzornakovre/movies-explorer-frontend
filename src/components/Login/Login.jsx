@@ -1,11 +1,14 @@
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import AuthForm from '../AuthForm/AuthForm';
 
 function Login() {
   return (
     <>
-      <Header page="signin" />
-      <Footer />
+      <AuthForm type="signin"
+                title="Рады видеть!"
+                submitText="Войти"
+                tipText="Еще не зарегестрированы?"
+                tipButtonText="Регистрация"
+                tipLink="/signup" />
     </>
   )
 }

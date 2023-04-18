@@ -1,11 +1,14 @@
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import AuthForm from '../AuthForm/AuthForm';
 
 function Register() {
   return (
     <>
-      <Header page="signup"/>
-      <Footer />
+      <AuthForm type="signup"
+                title="Добро пожаловать!"
+                submitText="Зарегистрироваться"
+                tipText="Уже зарегестрированы?"
+                tipButtonText="Войти"
+                tipLink="/signin" />
     </>
   )
 }
