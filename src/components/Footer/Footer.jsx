@@ -4,7 +4,7 @@ function Footer() {
       <div className="footer__content">
         <p className="footer__top">Учебный проект Яндекс.Практикум х BeatFilm.</p>
         <div className="footer__bottom">
-          <p className="footer__copyright">&copy; 2020</p>
+          <p className="footer__copyright">&copy; {(new Date()).getFullYear()}</p>
           <ul className="footer__links-list">
             <li className="footer__links-item">
               <a className="footer__link"
