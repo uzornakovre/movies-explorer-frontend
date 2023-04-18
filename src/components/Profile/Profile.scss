@@ -1,0 +1,77 @@
+.profile {
+  max-width: calc(1280px - 70px * 2);
+  padding: 74px 70px 0;
+  margin: 0 auto;
+  max-width: 410px;
+
+  &__title {
+    margin: 0;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
+
+  &__info {
+    margin-top: 108px;
+    margin-bottom: 204px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  &__info-row {
+    &:not(:last-child) {
+      border-bottom: 1px solid #E8E8E8;
+    }
+  }
+
+  &__info-heading {
+    padding-top: 17px;
+    padding-bottom: 16px;
+    text-align: start;
+    font-weight: 500;
+  }
+
+  &__info-data {
+    padding-top: 17px;
+    padding-bottom: 16px;
+    text-align: end;
+    font-weight: 400;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__button {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+
+    &_type_edit {
+      font-weight: 400;
+    }
+
+    &_type_logout {
+      font-weight: 500;
+      color:#EE3465;
+    }
+  }
+}
