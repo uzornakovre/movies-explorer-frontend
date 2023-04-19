@@ -1,6 +1,21 @@
 .auth {
-  max-width: 396px;
-  margin: 70px auto 0;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 396px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 767px) {
+    position: relative;
+    padding: 56px 30px;
+    top: 0;
+    left: 0;
+    transform: none;
+    width: calc(100% - 30px * 2);
+  }
 
   &__to-startpage {
     transition: opacity .2s linear;
@@ -12,6 +27,10 @@
     &:active{
       opacity: .6;
     }
+
+    @media screen and (max-width: 767px) {
+      align-self: center;
+    }
   }
 
   &__title {
@@ -19,6 +38,12 @@
     font-weight: 500;
     font-size: 24px;
     line-height: 29px;
+
+    @media screen and (max-width: 767px) {
+      align-self: center;
+      margin-top: 47px;
+      margin-bottom: 80px;
+    }
   }
 
   &__form-fieldset {
@@ -73,11 +98,24 @@
     padding: 0;
     cursor: pointer;
 
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+      line-height: 15px;
+    }
+
     &_type_signup {
       margin-top: 128px;
+
+      @media screen and (max-width: 767px) {
+        margin-top: 217px;
+      }
     }
     &_type_signin {
       margin-top: 197px;
+
+      @media screen and (max-width: 767px) {
+        margin-top: 286px;
+      }
     }
 
     &:hover {
@@ -96,6 +134,12 @@
     font-size: 14px;
     line-height: 17px;
     color: #A0A0A0;
+
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+      line-height: 15px;
+      margin-top: 14px;
+    }
   }
 
   &__link {
