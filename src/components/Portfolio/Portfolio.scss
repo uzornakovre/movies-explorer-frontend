@@ -6,6 +6,10 @@
     margin-top: 91px;
   }
 
+  @media screen and (max-width: 767px) {
+    margin-top: 70px;
+  }
+
   &__title {
     font-weight: 400;
     font-size: 18px;
@@ -14,5 +18,10 @@
     mix-blend-mode: normal;
     margin: 0;
     margin-bottom: 39px;
+
+    @media screen and (max-width: 767px) {
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 }

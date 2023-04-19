@@ -28,6 +28,13 @@
     line-height: 2.14;
   }
 
+  @media screen and (max-width: 767px) {
+    font-size: 18px;
+    line-height: 1.56;
+    margin-top: 2px;
+    margin-bottom: 18px;
+  }
+
   &__name {
     margin: inherit;
   }
@@ -36,5 +43,9 @@
     margin: inherit;
     position: relative;
     top: 5px;
+
+    @media screen and (max-width: 767px) {
+      top: 0;
+    }
   }
 }

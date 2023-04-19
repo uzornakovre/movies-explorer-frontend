@@ -7,14 +7,8 @@
     padding: 90px 50px 121px;
   }
 
-  &__title {
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 27px;
-    letter-spacing: -0.04em;
-    margin: 0;
-    padding-bottom: 23px;
-    border-bottom: 1px solid #000;
+  @media screen and (max-width: 767px) {
+    padding: 70px 18px 93px;
   }
 
   &__descriptions {
@@ -27,6 +21,13 @@
     @media screen and (max-width: 1023px) {
       gap: 30px;
       margin-bottom: 94px;
+    }
+
+    @media screen and (max-width: 767px) {
+      gap: 56px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      grid-template-columns: 1fr;
     }
   }
 
@@ -41,6 +42,12 @@
     @media screen and (max-width: 1023px) {
       margin-bottom: 22px;
     }
+
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
   }
 
   &__description-text {
@@ -52,6 +59,11 @@
     @media screen and (max-width: 1023px) {
       font-size: 12px;
       line-height: 1.5;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 1.45;
     }
   }
 
@@ -65,6 +77,12 @@
     align-items: center;
     height: 36px;
     width: 100%;
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 13px;
+      grid-template-columns: 35% 65%;
+    }
   }
 
   &__progress {
@@ -77,6 +95,10 @@
     margin: 0;
     text-align: center;
 
+    @media screen and (max-width: 767px) {
+      padding-top: 11px;
+    }
+
     &_week {
       background-color: #3456F3;
       color: #FFF;
@@ -85,10 +107,12 @@
         position: absolute;
         font-weight: 500;
         color: #A0A0A0;
+        min-width: max-content;
         content: 'Back-end';
-        bottom: -32px;
+        bottom: -22px;
         left: 50%;
         transform: translateX(-50%);
+        letter-spacing: -0.02em;
       }
     }
 
@@ -100,10 +124,12 @@
         position: absolute;
         font-weight: 500;
         color: #A0A0A0;
+        min-width: max-content;
         content: 'Front-end';
-        bottom: -32px;
+        bottom: -22px;
         left: 50%;
         transform: translateX(-50%);
+        letter-spacing: -0.02em;
       }
     }
   }

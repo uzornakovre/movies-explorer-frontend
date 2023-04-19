@@ -1,8 +1,10 @@
+import SectionTitle from "../SectionTitle/SectionTitle";
+
 function Techs() {
   return (
     <section className="techs">
       <div className="techs__content">
-        <h2 className="techs__title">Технологии</h2>
+        <SectionTitle title="Технологии" />
         <div className="techs__description">
           <h3 className="techs__subtitle">7 технологий</h3>
           <p className="techs__text">На курсе веб-разработки мы освоили технологии, 
