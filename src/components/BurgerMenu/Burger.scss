@@ -27,11 +27,19 @@
     &::before {
       content: '';
       top: 10px;
+
+      @media screen and (max-width: 767px) {
+        top: 9px
+      }
     }
 
     &::after {
       content: '';
       top: -10px;
+
+      @media screen and (max-width: 767px) {
+        top: -9px
+      }
     }
   }
 
@@ -43,6 +51,10 @@
       height: 3px;
       background-color: #000;
       transition: all .5s cubic-bezier(.25,.75,.25,.75);
+
+      @media screen and (max-width: 767px) {
+        width: 22px;
+      }
     }
   }
 

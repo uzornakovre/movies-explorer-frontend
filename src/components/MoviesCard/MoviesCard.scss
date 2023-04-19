@@ -9,12 +9,21 @@
   &:hover {
     transform: scale(1.02);
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+
+    @media screen and (max-width: 767px) {
+      transform: none;
+      box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    }
   }
 
   &__heading {
     display: flex;
     justify-content: space-between;
     padding: 18px;
+
+    @media screen and (max-width: 767px) {
+      padding: 14px;
+    }
   }
 
   &__title {
@@ -24,6 +33,11 @@
     font-size: 15px;
     line-height: 1.2;
     color: #000000;
+
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+      line-height: 1.5;
+    }
   }
 
   &__duration {
@@ -33,6 +47,11 @@
     font-size: 13px;
     line-height: 1.38;
     color: #A0A0A0;
+
+    @media screen and (max-width: 767px) {
+      font-size: 10px;
+      line-height: 18px;
+    }
   }
 
   &__image {
@@ -45,6 +64,10 @@
     display: flex;
     justify-content: center;
     padding: 17px 0;
+
+    @media screen and (max-width: 767px) {
+      padding: 13px 0;
+    }
   }
 
   &__save-button {
@@ -68,6 +91,11 @@
 
     &:active {
       opacity: .6;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 12px;
+      line-height: 11px;
     }
 
     &_active {

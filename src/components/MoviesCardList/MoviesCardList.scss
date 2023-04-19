@@ -7,7 +7,10 @@
   @media screen and (max-width: 1023px) {
     padding-left: 30px;
     padding-right: 30px;
-    // padding-bottom: 160px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 30px 10px 112px;
   }
 
   &__list {
@@ -36,7 +39,6 @@
   }
 
   &__load-more {
-    z-index: 2;
     margin-top: 50px;
     width: 100%;
     min-height: 36px;
@@ -67,11 +69,11 @@
     &_page_saved-movies {
       visibility: hidden;
       margin-bottom: 55px;
-    }
 
-    @media screen and (max-width: 1023px) {
-      margin-top: 23px;
-      margin-bottom: 0;
+      @media screen and (max-width: 1023px) {
+        margin-top: 23px;
+        margin-bottom: 0;
+      }
     }
   }
 }
