@@ -2,6 +2,18 @@
   max-width: 396px;
   margin: 70px auto 0;
 
+  &__to-startpage {
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active{
+      opacity: .6;
+    }
+  }
+
   &__title {
     margin: 36px 0 40px;
     font-weight: 500;
