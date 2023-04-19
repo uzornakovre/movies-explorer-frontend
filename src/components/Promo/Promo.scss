@@ -10,6 +10,22 @@
     grid-template-columns: minmax(300px, 640px) auto;
     justify-content: space-between;
     row-gap: 84px;
+
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      padding-top: 140px;
+      row-gap: 48px;
+    }
+  }
+
+  &__heading {
+    @media screen and (max-width: 1023px) {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+    }
   }
 
   &__heading-title {
@@ -17,7 +33,13 @@
     font-size: 50px;
     line-height: 1.16;
     margin: 0;
-    margin-bottom: 36px
+    margin-bottom: 36px;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 40px;
+      line-height: 50px;
+      margin-bottom: 22px;
+    }
   }
 
   &__heading-subtitle {
@@ -28,6 +50,11 @@
     margin: 0;
     mix-blend-mode: normal;
     opacity: 0.5;
+
+    @media screen and (max-width: 1023px) {
+      max-width: 260px;
+      margin: 0 auto;
+    }
   }
 
   &__button {
@@ -41,9 +68,7 @@
     border: 1px solid rgba(0, 0, 0, .6);
     border-radius: 3px;
     justify-self: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     transition: opacity .2s linear;
     cursor: pointer;
 
@@ -54,10 +79,18 @@
     &:active {
       opacity: .5;
     }
+
+    @media screen and (max-width: 1023px) {
+      margin: 44px auto 0;
+    }
   }
 
   &__image {
     width: 310px;
     height: 304px;
+    
+    @media screen and (max-width: 1023px) {
+      order: -1;
+    }
   }
 }

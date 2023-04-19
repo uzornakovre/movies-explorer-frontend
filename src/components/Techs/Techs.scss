@@ -2,6 +2,10 @@
   background-color: #F5F5F5;
   padding: 100px 70px;
 
+  @media screen and (max-width: 1023px) {
+    padding: 90px 50px;
+  }
+
   &__content {
     max-width: calc(1280px - 70px * 2);
     margin: 0 auto;
@@ -33,6 +37,11 @@
     margin-top: 90px;
     margin-bottom: 26px;
     text-align: center;
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 80px;
+      margin-bottom: 22px;
+    }
   }
 
   &__text {
@@ -43,6 +52,11 @@
     letter-spacing: -0.04em;
     text-align: center;
     margin: 0;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 1.5;
+    }
   }
 
   &__list {
@@ -52,6 +66,10 @@
     padding: 0;
     margin-top: 100px;
     margin-bottom: 0;
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 83px;
+    }
   }
 
   &__list-item {
@@ -71,6 +89,13 @@
 
     &:hover {
       background-color: #d3caca;
+    }
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 15px;
+      min-width: 84px;
+      min-height: 57px;
     }
   }
 }
