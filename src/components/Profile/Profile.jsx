@@ -6,7 +6,8 @@ function Profile() {
 
   return (
     <>
-      <Header page="profile" />
+      <Header page="profile"
+              type="logged-in" />
       <div className="profile">
         <h2 className="profile__title">{`Привет, ${userName}!`}</h2>
         <table className="profile__info">

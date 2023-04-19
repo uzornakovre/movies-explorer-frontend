@@ -9,7 +9,8 @@ import AboutMe from '../AboutMe/AboutMe';
 function Main() {
   return (
     <>
-      <Header page="main"/>
+      <Header page="main"
+              type="start-page"/>
       <Promo />
       <AboutProject />
       <Techs />

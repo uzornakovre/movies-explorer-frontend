@@ -6,7 +6,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function SavedMovies() {
   return (
     <>
-      <Header page="saved-movies" />
+      <Header page="saved-movies"
+              type="logged-in" />
       <MoviesCardList page="saved-movies"/>
       <Footer />
     </>

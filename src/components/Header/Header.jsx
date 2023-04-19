@@ -1,6 +1,6 @@
 import Navigation from '../Navigation/Navigation';
 
-function Header({ page }) {
+function Header({ page, type }) {
   return (
     <header className={`header header_page_${page}`}>
       <div className="header__content">
@@ -16,7 +16,9 @@ function Header({ page }) {
         22.8462C21.1242 22.8462 22.8462 21.1242 22.8462 19H25C25 22.3137 22.3137 25 19 25C15.6863 25 13 22.3137 
         13 19H15.1538Z" fill="#inherit"/>
       </svg>
-      <Navigation page={page} />
+      <Navigation page={page}
+                  type={type}
+                  place="header" />
       </div>
     </header>
   )
