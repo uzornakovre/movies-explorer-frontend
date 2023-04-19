@@ -4,6 +4,12 @@
   margin: 0 auto;
   background-color: #FAFAFA;
 
+  @media screen and (max-width: 1023px) {
+    padding-left: 30px;
+    padding-right: 30px;
+    // padding-bottom: 160px;
+  }
+
   &__list {
     padding: 10px 0;
     margin: 0;
@@ -15,6 +21,18 @@
     justify-content: center;
     justify-items: stretch;
     align-items: stretch;
+
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: repeat(2, minmax(auto, 50%));
+      row-gap: 35px;
+      column-gap: 24px;
+      padding-bottom: 30px;
+    }
+
+    @media screen and (max-width: 767px) {
+      grid-template-columns: minmax(auto, 100%);
+      gap: 16px;
+    }
   }
 
   &__load-more {
@@ -39,6 +57,21 @@
 
     &:active {
       opacity: .6;
+    }
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 52px;
+    }
+
+    /* временно, для сверки макета */
+    &_page_saved-movies {
+      visibility: hidden;
+      margin-bottom: 55px;
+    }
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 23px;
+      margin-bottom: 0;
     }
   }
 }

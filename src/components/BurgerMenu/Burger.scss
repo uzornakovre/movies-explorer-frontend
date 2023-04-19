@@ -1,6 +1,7 @@
 .burger {
   display: none;
   justify-content: center;
+  margin-right: 8px;
 
   @media screen and (max-width: 1023px) {
     display: flex;
@@ -25,12 +26,12 @@
 
     &::before {
       content: '';
-      top: 9px;
+      top: 10px;
     }
 
     &::after {
       content: '';
-      top: -9px;
+      top: -10px;
     }
   }
 
@@ -38,7 +39,7 @@
     @media screen and (max-width: 1023px) {
       display: block;
       position: absolute;
-      width: 24px;
+      width: 28px;
       height: 3px;
       background-color: #000;
       transition: all .5s cubic-bezier(.25,.75,.25,.75);

@@ -26,7 +26,7 @@ function MoviesCard({ page }) {
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMovieSaved, buttonContent]);
+  }, [isMovieSaved]);
 
   return (
     <article className="movies-card">

@@ -9,21 +9,33 @@ function MoviesCardList({ page }) {
 
   return (
     <section className="movies" aria-label="Фильмы">
-      <ul className="movies__list">
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-        <li><MoviesCard page={page} /></li>
-      </ul>
-      <button className="movies__load-more" type="button">Ещё</button>
+      {/* временное рещение для сверки с макетом */}
+      {page === "movies" && 
+        <>
+          <ul className={`movies__list movies__list_page_${page}`}>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+            <li><MoviesCard page={page} /></li>
+          </ul>
+        </>
+      }
+      {page === "saved-movies" && 
+        <ul className={`movies__list movies__list_page_${page}`}>
+          <li><MoviesCard page={page} /></li>
+          <li><MoviesCard page={page} /></li>
+          <li><MoviesCard page={page} /></li>
+        </ul>
+      }
+      <button className={`movies__load-more movies__load-more_page_${page}`} type="button">Ещё</button>
     </section>
   )
 }
