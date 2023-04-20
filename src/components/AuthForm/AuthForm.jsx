@@ -6,8 +6,10 @@ function AuthForm({ type,
                     submitText,
                     tipText,
                     tipButtonText,
-                    tipLink }) {
-  const tempError = 'Здесь будет ошибка валидации'; // temp
+                    tipLink,
+                    formData,
+                    children
+                  }) {
 
   return (
     <div className="auth">
@@ -26,24 +28,30 @@ function AuthForm({ type,
           </svg>
         </Link> }
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form">
+      <form className="auth__form" noValidate>
         { type === 'signup' && <AuthFormField type="text"
-                                              id="userName"
+                                              name="userName"
                                               labelText="Имя"
-                                              error={tempError}
+                                              page={type}
+                                              formData={formData}
                                />
         }
         <AuthFormField type="email"
-                       id="email"
+                       name="email"
                        labelText="E-mail"
-                       error={tempError}
+                       page={type}
+                       formData={formData}
         />
         <AuthFormField type="password"
-                       id="password"
+                       name="password"
                        labelText="Пароль"
-                       error={tempError}
+                       page={type}
+                       formData={formData}
         />
-        <button className={`auth__submit auth__submit_type_${type}`} type="submit">{submitText}</button>
+        {children}
+        <button className={`auth__submit auth__submit_type_${type} ${!formData.isValid && 'auth__submit_disabled'}`}
+                type="submit"
+                disabled={!formData.isValid}>{submitText}</button>
       </form>
       <p className="auth__tip">
         {tipText}&ensp;{<Link to={tipLink} className="auth__link">{tipButtonText}</Link>}

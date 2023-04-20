@@ -7,9 +7,11 @@ import Movies from '../Movies/Movies';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
+import useFormData from '../../hooks/useFormData';
 
 function App() {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
+  const formData = useFormData();
 
   function handleBurgerClick() {
     setBurgerMenuOpen(true);
@@ -17,7 +19,6 @@ function App() {
 
   function closeBurgerMenu() {
     setBurgerMenuOpen(false);
-    console.log('asda')
   }
 
   return (
@@ -36,8 +37,8 @@ function App() {
           <Profile isBurgerMenuOpen={isBurgerMenuOpen}
                    onBurgerClick={handleBurgerClick}
                    closeBurgerMenu={closeBurgerMenu} /> }/>
-        <Route path="/signin" element={<Login />}/>
-        <Route path="/signup" element={<Register />}/>
+        <Route path="/signin" element={<Login formData={formData} />}/>
+        <Route path="/signup" element={<Register formData={formData} />}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

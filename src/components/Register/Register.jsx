@@ -1,6 +1,6 @@
 import AuthForm from '../AuthForm/AuthForm';
 
-function Register() {
+function Register({ formData }) {
   return (
     <>
       <AuthForm type="signup"
@@ -8,7 +8,8 @@ function Register() {
                 submitText="Зарегистрироваться"
                 tipText="Уже зарегестрированы?"
                 tipButtonText="Войти"
-                tipLink="/signin" />
+                tipLink="/signin"
+                formData={formData} />
     </>
   )
 }
