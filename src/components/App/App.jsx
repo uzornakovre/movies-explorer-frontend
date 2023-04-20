@@ -39,7 +39,7 @@ function App() {
                    closeBurgerMenu={closeBurgerMenu} /> }/>
         <Route path="/signin" element={<Login formData={formData} />}/>
         <Route path="/signup" element={<Register formData={formData} />}/>
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </div>
   )
