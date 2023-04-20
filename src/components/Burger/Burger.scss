@@ -1,0 +1,19 @@
+.burger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  background-image: url('../../images/burger.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+
+  @media screen and (max-width: 1023px) {
+    display: flex;
+  }
+
+  @media screen and (max-width: 767px) {
+    background-image: url('../../images/burger_small.svg');
+  }
+}

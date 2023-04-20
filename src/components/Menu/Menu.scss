@@ -1,0 +1,56 @@
+.menu {
+  position: relative;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .2s linear, visibility .2s linear;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .3);
+  justify-content: flex-end;
+
+  &_opened {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__close-button {
+    width: 38px;
+    height: 38px;
+    z-index: 2;
+    position: absolute;
+    top: 23px;
+    right: 23px;
+    background-image: url('../../images/close_icon.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  &__container {
+    position: relative;
+    box-sizing: border-box;
+    width: 520px;
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-left: auto;
+    transition: all .3s linear;
+    right: -50%;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    &_opened {
+      right: 0
+    }
+  }
+}

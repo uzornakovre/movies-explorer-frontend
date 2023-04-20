@@ -3,6 +3,19 @@
   align-items: center;
   gap: 50px;
 
+  &_place_burger {
+    flex-direction: column;
+    padding-top: 155px;
+    padding-bottom: 92px;
+    height: 100vh;
+    justify-content: space-between;
+
+    @media screen and (max-width: 767px) {
+      padding-top: 140px;
+      padding-bottom: 48px;
+    }
+  }
+
   &__menu {
     margin: 0;
     display: flex;
@@ -28,6 +41,10 @@
       font-size: 14px;
       line-height: 1.29;
 
+      @media screen and (max-width: 1023px) {
+        gap: 17px;
+      }
+
       @media screen and (max-width: 767px) {
         font-size: 10px;
         line-height: 1.6;
@@ -37,6 +54,32 @@
     &_place_header {
       @media screen and (max-width: 1023px) {
         display: none;
+      }
+    }
+
+    &_place_burger {
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      .navigation__button {
+        font-weight: 500;
+        max-width: 340px;
+        width: fit-content;
+        font-size: 18px;
+        line-height: 30px;
+
+        @media screen and (max-width: 767px) {
+          line-height: 29px;
+        }
+        
+        &_active {
+          border-bottom: 2px solid #000;
+        }
+
+        &_type_account {
+          font-size: 14px;
+        }
       }
     }
 
