@@ -74,13 +74,16 @@
     }
   }
 
-  &__button {
+  &__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
-    padding: 0;
+    padding: 10px 0;
     min-width: 129px;
-    min-height: 36px;
+    min-height: 12px;
     background-color: transparent;
     border: 1px solid rgba(0, 0, 0, .6);
     border-radius: 3px;

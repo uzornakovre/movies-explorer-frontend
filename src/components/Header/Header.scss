@@ -20,6 +20,18 @@
     }
   }
 
+  &__logo-link {
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+  }
+
   &_page_main {
     background-color: #DDDEE3;
   }

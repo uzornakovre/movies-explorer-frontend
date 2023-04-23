@@ -9,7 +9,7 @@ function Promo() {
           <p className="promo__heading-subtitle">Листайте ниже, чтобы узнать больше про этот проект и его создателя.</p>
         </div>
         <img className="promo__image" src={earthLogo} alt="Изображение планеты земля из слов Веб" />
-        <button className="promo__button" type="button">Узнать больше</button>
+        <a className="promo__link" href="#about">Узнать больше</a>
       </div>
     </section>
   )
