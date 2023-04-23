@@ -1,4 +1,4 @@
-function AuthFormField({ labelText, name, type, formData, page }) {
+function AuthFormField({ labelText, name, type, formData, page, placeholder }) {
   return (
     <fieldset className="auth__form-fieldset">
       <label className="auth__form-label" htmlFor={`${page}_${name}`}>{labelText}</label>
@@ -13,6 +13,7 @@ function AuthFormField({ labelText, name, type, formData, page }) {
              minLength={2}
              maxLength={40}
              required
+             placeholder={placeholder}
       ></input>
       <span className={`auth__form-input-error`}>{formData.errors[name]}</span>
     </fieldset>

@@ -34,6 +34,7 @@ function AuthForm({ type,
                                               labelText="Имя"
                                               page={type}
                                               formData={formData}
+                                              placeholder="Введите имя"
                                />
         }
         <AuthFormField type="email"
@@ -41,12 +42,14 @@ function AuthForm({ type,
                        labelText="E-mail"
                        page={type}
                        formData={formData}
+                       placeholder="Введите адрес электронной почты"
         />
         <AuthFormField type="password"
                        name="password"
                        labelText="Пароль"
                        page={type}
                        formData={formData}
+                       placeholder="Введите пароль"
         />
         {children}
         <button className={`auth__submit auth__submit_type_${type} ${!formData.isValid && 'auth__submit_disabled'}`}

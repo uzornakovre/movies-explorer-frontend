@@ -11,10 +11,12 @@ function Main() {
     <>
       <Header page="main"
               type="start-page"/>
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
+      <main className="content">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+      </main>
       <Footer />
     </>
   )

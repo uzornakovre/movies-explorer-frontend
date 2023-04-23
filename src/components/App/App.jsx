@@ -21,6 +21,12 @@ function App() {
     setBurgerMenuOpen(false);
   }
 
+  function handleMenuOverlayClick(evt) {
+    if (evt.target.classList.contains('menu_opened')) {
+      closeBurgerMenu();
+    }
+  }
+
   return (
     <div className="app">
       <Routes>
@@ -28,15 +34,18 @@ function App() {
         <Route path="/movies" element={
           <Movies isBurgerMenuOpen={isBurgerMenuOpen}
                   onBurgerClick={handleBurgerClick}
-                  closeBurgerMenu={closeBurgerMenu} /> }/>
+                  closeBurgerMenu={closeBurgerMenu}
+                  onOverlayClick={handleMenuOverlayClick} /> }/>
         <Route path="/saved-movies" element={
           <SavedMovies isBurgerMenuOpen={isBurgerMenuOpen}
                        onBurgerClick={handleBurgerClick}
-                       closeBurgerMenu={closeBurgerMenu} /> }/>
+                       closeBurgerMenu={closeBurgerMenu}
+                       onOverlayClick={handleMenuOverlayClick} /> }/>
         <Route path="/profile" element={
           <Profile isBurgerMenuOpen={isBurgerMenuOpen}
                    onBurgerClick={handleBurgerClick}
-                   closeBurgerMenu={closeBurgerMenu} /> }/>
+                   closeBurgerMenu={closeBurgerMenu}
+                   onOverlayClick={handleMenuOverlayClick} /> }/>
         <Route path="/signin" element={<Login formData={formData} />}/>
         <Route path="/signup" element={<Register formData={formData} />}/>
         <Route path="/*" element={<NotFound />} />

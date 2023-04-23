@@ -8,6 +8,16 @@
   background-image: url('../../images/burger.svg');
   background-repeat: no-repeat;
   background-position: center;
+  cursor: pointer;
+  transition: opacity .2s linear;
+
+  &:hover {
+    opacity: .8;
+  }
+
+  &:active {
+    opacity: .6;
+  }
 
   @media screen and (max-width: 1023px) {
     display: flex;

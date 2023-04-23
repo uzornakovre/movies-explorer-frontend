@@ -1,8 +1,9 @@
 import Navigation from "../Navigation/Navigation";
 
-function Menu({ isOpen, page, closeBurgerMenu }) {
+function Menu({ isOpen, page, closeBurgerMenu, onOverlayClick }) {
   return (
-    <div className={`menu ${isOpen ? 'menu_opened' : ''}`}>
+    <div className={`menu ${isOpen ? 'menu_opened' : ''}`}
+         onMouseDown={onOverlayClick}>
       <button className="menu__close-button" 
               type="button"
               onClick={closeBurgerMenu}></button>
