@@ -1,0 +1,79 @@
+.movies {
+  max-width: calc(1280px - 70px * 2);
+  padding: 58px 70px 80px;
+  margin: 0 auto;
+  background-color: #FAFAFA;
+
+  @media screen and (max-width: 1023px) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 30px 10px 112px;
+  }
+
+  &__list {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 360px));
+    row-gap: 31px;
+    column-gap: 28px;
+    justify-content: center;
+    justify-items: stretch;
+    align-items: stretch;
+
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: repeat(2, minmax(auto, 50%));
+      row-gap: 35px;
+      column-gap: 24px;
+      padding-bottom: 30px;
+    }
+
+    @media screen and (max-width: 767px) {
+      grid-template-columns: minmax(auto, 100%);
+      gap: 16px;
+    }
+  }
+
+  &__load-more {
+    margin-top: 50px;
+    width: 100%;
+    min-height: 36px;
+    background-color: #F4F4F4;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #000;
+    border-radius: 6px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 52px;
+    }
+
+    /* временно, для сверки макета */
+    &_page_saved-movies {
+      visibility: hidden;
+      margin-bottom: 55px;
+
+      @media screen and (max-width: 1023px) {
+        margin-top: 23px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

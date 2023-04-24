@@ -1,0 +1,128 @@
+.about-me {
+  max-width: calc(1280px - 70px * 2);
+  padding: 110px 70px 96px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1023px) {
+    padding: 90px 50px 61px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 70px 14px;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 600px auto;
+    justify-content: space-between;
+    margin-top: 66px;
+
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: 390px auto;
+    }
+
+    @media screen and (max-width: 880px) {
+      grid-template-columns: 264px auto;
+    }
+
+    @media screen and (max-width: 767px) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      margin-top: 60px;
+      gap: 40px;
+    }
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin: 0;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
+
+  &__job {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11;
+    mix-blend-mode: normal;
+    margin: 18px 0 26px;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 1.45;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    margin-bottom: 99px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.57;
+    mix-blend-mode: normal;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 1.45;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__portfolio {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000;
+    text-decoration: none;
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &:active {
+      opacity: .5;
+    }
+  }
+
+  &__photo {
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 10px;
+
+    @media screen and (max-width: 1023px) {
+      width: 255px;
+      height: 307px;
+    }
+
+    @media screen and (max-width: 767px) {
+      width: 292px;
+      height: 352px;
+      order: -1;
+    }
+  }
+}

@@ -1,0 +1,136 @@
+.about-project {
+  max-width: calc(1280px - 70px * 2);
+  padding: 110px 70px 141px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 1023px) {
+    padding: 90px 50px 121px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 70px 18px 93px;
+  }
+
+  &__descriptions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(319px, 550px));
+    gap: 40px;
+    margin-top: 70px;
+    margin-bottom: 110px;
+
+    @media screen and (max-width: 1023px) {
+      gap: 30px;
+      margin-bottom: 94px;
+    }
+
+    @media screen and (max-width: 767px) {
+      gap: 56px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__description-title {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    margin-bottom: 26px;
+
+    @media screen and (max-width: 1023px) {
+      margin-bottom: 22px;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__description-text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+    margin: 0;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 1.45;
+    }
+  }
+
+  &__progress-bar {
+    font-size: 14px;
+    line-height: 1.21;
+    font-weight: 400;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    justify-items: center;
+    align-items: center;
+    height: 36px;
+    width: 100%;
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 13px;
+      grid-template-columns: 35% 65%;
+    }
+  }
+
+  &__progress {
+    position: relative;
+    box-sizing: border-box;
+    padding: 9px 0;
+    display: block;
+    width: inherit;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+
+    @media screen and (max-width: 767px) {
+      padding-top: 11px;
+    }
+
+    &_week {
+      background-color: #3456F3;
+      color: #FFF;
+  
+      &::after {
+        position: absolute;
+        font-weight: 500;
+        color: #A0A0A0;
+        min-width: max-content;
+        content: 'Back-end';
+        bottom: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        letter-spacing: -0.02em;
+      }
+    }
+
+    &_month {
+      background-color: #F2F2F2;
+      color: #000;
+      
+      &::after {
+        position: absolute;
+        font-weight: 500;
+        color: #A0A0A0;
+        min-width: max-content;
+        content: 'Front-end';
+        bottom: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        letter-spacing: -0.02em;
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+.techs {
+  background-color: #F5F5F5;
+  padding: 100px 70px;
+
+  @media screen and (max-width: 1023px) {
+    padding: 90px 50px;
+  }
+
+  @media screen and (max-width: 767px) {
+    background-color: #FAFAFA;
+    padding: 70px 18px;
+  }
+
+  &__content {
+    max-width: calc(1280px - 70px * 2);
+    margin: 0 auto;
+  }
+
+  &__description {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__subtitle {
+    max-width: 460px;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+    margin-top: 90px;
+    margin-bottom: 26px;
+    text-align: center;
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 80px;
+      margin-bottom: 22px;
+    }
+
+    @media screen and (max-width: 767px) {
+      margin-top: 60px;
+      margin-bottom: 24px;
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
+
+  &__text {
+    max-width: 460px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+    letter-spacing: -0.04em;
+    text-align: center;
+    margin: 0;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 767px) {
+      font-size: 11px;
+      line-height: 1.45;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+    margin-top: 100px;
+    margin-bottom: 0;
+
+    @media screen and (max-width: 1023px) {
+      margin-top: 83px;
+    }
+
+    @media screen and (max-width: 767px) {
+      grid-template-columns: repeat(4, auto);
+      margin-top: 50px;
+    }
+
+    @media screen and (max-width: 450px) {
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+
+  &__list-item {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 90px;
+    min-height: 60px;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+    transition: background-color .2s linear;
+
+    &:hover {
+      background-color: #d3caca;
+
+      @media screen and (max-width: 767px) {
+        background-color: #E8E8E8;
+      }
+    }
+
+    @media screen and (max-width: 1023px) {
+      font-size: 12px;
+      line-height: 15px;
+      min-width: 84px;
+      min-height: 57px;
+    }
+  }
+}

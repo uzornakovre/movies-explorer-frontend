@@ -1,0 +1,38 @@
+.header {
+  margin: 0 auto;
+  background-color: #FAFAFA;
+
+  &__content {
+    max-width: calc(1280px - 70px * 2);
+    padding: 18px 70px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1023px) {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    @media screen and (max-width: 767px) {
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+
+  &__logo-link {
+    transition: opacity .2s linear;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:active {
+      opacity: .6;
+    }
+  }
+
+  &_page_main {
+    background-color: #DDDEE3;
+  }
+}
