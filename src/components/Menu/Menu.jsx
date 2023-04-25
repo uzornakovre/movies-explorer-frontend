@@ -10,7 +10,6 @@ function Menu({ isOpen, page, closeBurgerMenu, onOverlayClick }) {
       <div className={`menu__container ${isOpen ? 'menu__container_opened' : ''}`}>
         <Navigation type="logged-in"
                     place="burger"
-                    page={page}
                     closeBurgerMenu={closeBurgerMenu} />
       </div>
     </div>

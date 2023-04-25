@@ -113,6 +113,15 @@
 
     &_active {
       font-weight: 500;
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:active {
+        opacity: 1;
+      }
     }
 
     &_type_account {

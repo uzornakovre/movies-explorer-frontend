@@ -19,8 +19,7 @@ function Header({ page, type, onBurgerClick, isBurgerMenuOpen }) {
             13 19H15.1538Z" fill="inherit"/>
           </svg>         
         </Link>
-      <Navigation page={page}
-                  type={type}
+      <Navigation type={type}
                   place="header"
                   onBurgerClick={onBurgerClick}
                   isBurgerMenuOpen={isBurgerMenuOpen} />
