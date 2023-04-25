@@ -8,6 +8,8 @@ function AuthForm({ type,
                     tipButtonText,
                     tipLink,
                     formData,
+                    errorToolTip,
+                    handleSubmit,
                     children
                   }) {
 
@@ -28,7 +30,7 @@ function AuthForm({ type,
         </svg>
       </Link>
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form" noValidate>
+      <form className="auth__form" onSubmit={handleSubmit} noValidate>
         { type === 'signup' && <AuthFormField type="text"
                                               name="userName"
                                               labelText="Имя"
@@ -52,7 +54,8 @@ function AuthForm({ type,
                        placeholder="Введите пароль"
         />
         {children}
-        <button className={`auth__submit auth__submit_type_${type} ${!formData.isValid && 'auth__submit_disabled'}`}
+        <span className="auth__error-tool-tip">{errorToolTip}</span>
+        <button className={`auth__submit auth__submit_type_${type}`}
                 type="submit"
                 disabled={!formData.isValid}>{submitText}</button>
       </form>

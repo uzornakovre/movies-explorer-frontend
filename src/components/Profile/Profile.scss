@@ -23,7 +23,7 @@
 
   &__info {
     margin-top: 108px;
-    margin-bottom: 204px;
+    margin-bottom: calc(204px - 13px);
     width: 100%;
     border-collapse: collapse;
     font-size: 11px;
@@ -40,24 +40,61 @@
     }
   }
 
-  &__info-row {
-    &:not(:last-child) {
-      border-bottom: 1px solid #E8E8E8;
+  &__fieldset {
+    border: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__label {
+    padding-top: 5px;
+    text-align: start;
+    font-weight: 500;
+    position: absolute;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 16px;
+    padding-left: 30%;
+    text-align: end;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid #E8E8E8;
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid #3456F3;
+    }
+
+    &_last {
+      border-color: transparent;
     }
   }
 
-  &__info-heading {
-    padding-top: 17px;
-    padding-bottom: 16px;
-    text-align: start;
-    font-weight: 500;
+  &__input-error {
+    display: block;
+    color: #EE3465;
+    min-height: 13px;
+    text-align: end;
   }
 
-  &__info-data {
-    padding-top: 17px;
-    padding-bottom: 16px;
-    text-align: end;
-    font-weight: 400;
+  &__error-tool-tip {
+    display: block;
+    text-align: center;
+    min-height: 17px;
+    font-size: 11px;
+    line-height: 13px;
+    // color: #EE3465;
+    color: #3456F3;
+
+    &_success {
+      color: #3456F3;
+    }
   }
 
   &__actions {
@@ -81,6 +118,11 @@
     }
 
     &:active {
+      opacity: .6;
+    }
+
+    &:disabled {
+      cursor: default;
       opacity: .6;
     }
 

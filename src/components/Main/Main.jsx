@@ -4,13 +4,22 @@ import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import Techs from '../Techs/Techs';
 import AboutMe from '../AboutMe/AboutMe';
-// import Portfolio from '../Portfolio/Portfolio';
+import Menu from '../Menu/Menu';
 
-function Main() {
+function Main({ 
+  loggedIn,
+  isBurgerMenuOpen,
+  closeBurgerMenu,
+  handleMenuOverlayClick,
+  onBurgerClick,
+}) {
   return (
     <>
       <Header page="main"
-              type="start-page"/>
+              type="start-page"
+              loggedIn={loggedIn}
+              onBurgerClick={onBurgerClick}
+              isBurgerMenuOpen={isBurgerMenuOpen}  />
       <main className="content">
         <Promo />
         <AboutProject />
@@ -18,6 +27,10 @@ function Main() {
         <AboutMe />
       </main>
       <Footer />
+      <Menu isOpen={isBurgerMenuOpen}
+            closeBurgerMenu={closeBurgerMenu}
+            loggedIn={loggedIn}
+            onOverlayClick={handleMenuOverlayClick} />
     </>
   )
 }

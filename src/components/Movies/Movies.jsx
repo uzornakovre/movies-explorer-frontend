@@ -8,12 +8,14 @@ import Menu from '../Menu/Menu';
 function Movies({ onBurgerClick,
                   isBurgerMenuOpen,
                   closeBurgerMenu,
-                  onOverlayClick
+                  onOverlayClick,
+                  loggedIn
                 }) {
   return (
     <>
       <Header page="movies"
               type="logged-in"
+              loggedIn={loggedIn}
               onBurgerClick={onBurgerClick}
               isBurgerMenuOpen={isBurgerMenuOpen} />
       <main className="content">
@@ -23,7 +25,7 @@ function Movies({ onBurgerClick,
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}
             closeBurgerMenu={closeBurgerMenu}
-            page="movies"
+            loggedIn={loggedIn}
             onOverlayClick={onOverlayClick} />
     </>
   )

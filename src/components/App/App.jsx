@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Main from '../Main/Main';
@@ -8,13 +8,79 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import NotFound from '../NotFound/NotFound';
 import useFormData from '../../hooks/useFormData';
+import { auth } from '../../utils/Auth';
+import { mainApi } from '../../utils/MainApi';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const formData = useFormData();
+  const navigate = useNavigate();
+  const jwt = localStorage.getItem('jwt');
+
+  // Авторизация
+
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  function handleLogout() {
+    setLoggedIn(false);
+    localStorage.removeItem('jwt');
+    navigate('/', {replace: true});
+  }
+
+  function tokenCheck() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      auth.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setLoggedIn(true);
+          }
+        })
+        .catch((error) => {
+          console.log(`Ошибка при получении данных: ${error}`);
+        })
+    }
+  }
+
+  // Получение данных с сервера о пользователе, проверка токена
+
+  useEffect(() => {
+    tokenCheck();
+    if (loggedIn) {
+      mainApi.getCurrentUser(jwt)
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((error) => {
+        console.log(`Ошибка при получении данных: ${error}`);
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
+  // Обновление данных о пользователе
+
+  function handleUpdateUser(userData) {
+    mainApi.updateUserInfo(userData, jwt)
+      .then((newUserData) => {
+        setCurrentUser(newUserData);
+        navigate('/profile', {replace: true});
+      })
+      .catch((error) => {
+        console.log(`Ошибка при изменении данных о пользователе: ${error}`);
+      })
+  }
+
+  // "Бургер"-меню
 
   function handleBurgerClick() {
     setBurgerMenuOpen(true);
+    console.log('123');
   }
 
   function closeBurgerMenu() {
@@ -28,29 +94,42 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <Routes>
-        <Route path="/" element={<Main />}/>
-        <Route path="/movies" element={
-          <Movies isBurgerMenuOpen={isBurgerMenuOpen}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={
+            <Main isBurgerMenuOpen={isBurgerMenuOpen}
                   onBurgerClick={handleBurgerClick}
                   closeBurgerMenu={closeBurgerMenu}
-                  onOverlayClick={handleMenuOverlayClick} /> }/>
-        <Route path="/saved-movies" element={
-          <SavedMovies isBurgerMenuOpen={isBurgerMenuOpen}
-                       onBurgerClick={handleBurgerClick}
-                       closeBurgerMenu={closeBurgerMenu}
-                       onOverlayClick={handleMenuOverlayClick} /> }/>
-        <Route path="/profile" element={
-          <Profile isBurgerMenuOpen={isBurgerMenuOpen}
-                   onBurgerClick={handleBurgerClick}
-                   closeBurgerMenu={closeBurgerMenu}
-                   onOverlayClick={handleMenuOverlayClick} /> }/>
-        <Route path="/signin" element={<Login formData={formData} />}/>
-        <Route path="/signup" element={<Register formData={formData} />}/>
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </div>
+                  onOverlayClick={handleMenuOverlayClick}
+                  loggedIn={loggedIn} />}/>
+          <Route path="/movies" element={
+            <Movies isBurgerMenuOpen={isBurgerMenuOpen}
+                    onBurgerClick={handleBurgerClick}
+                    closeBurgerMenu={closeBurgerMenu}
+                    onOverlayClick={handleMenuOverlayClick}
+                    loggedIn={loggedIn} /> }/>
+          <Route path="/saved-movies" element={
+            <SavedMovies isBurgerMenuOpen={isBurgerMenuOpen}
+                        onBurgerClick={handleBurgerClick}
+                        closeBurgerMenu={closeBurgerMenu}
+                        onOverlayClick={handleMenuOverlayClick}
+                        loggedIn={loggedIn} /> }/>
+          <Route path="/profile" element={
+            <Profile isBurgerMenuOpen={isBurgerMenuOpen}
+                    onBurgerClick={handleBurgerClick}
+                    closeBurgerMenu={closeBurgerMenu}
+                    onOverlayClick={handleMenuOverlayClick}
+                    loggedIn={loggedIn}
+                    handleLogout={handleLogout}
+                    formData={formData}
+                    handleUpdateUser={handleUpdateUser} /> }/>
+          <Route path="/signin" element={<Login formData={formData} handleLogin={handleLogin} />}/>
+          <Route path="/signup" element={<Register formData={formData} />}/>
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </CurrentUserContext.Provider>
   )
 }
 

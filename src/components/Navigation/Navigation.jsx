@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Navigation({ type, 
                       place, 
                       onBurgerClick, 
-                      isBurgerMenuOpen,
+                      loggedIn,
                       closeBurgerMenu
                     }) {
 
@@ -12,12 +12,11 @@ function Navigation({ type,
     if (isActive) {
       return "navigation__button navigation__button_active";
     } else return "navigation__button";
-    
   }
 
   return (
     <nav className={`navigation navigation_type_${type} navigation_place_${place}`}>
-      {type === "logged-in" && 
+      {loggedIn && 
         <>
           <ul className={`navigation__menu navigation__menu_type_movies navigation__menu_place_${place}`}>
             {place === "burger" &&
@@ -57,11 +56,11 @@ function Navigation({ type,
             </li>
           </ul>
           {place !== "burger" && 
-            <Burger onBurgerClick={onBurgerClick} /> 
+            <Burger onBurgerClick={onBurgerClick} loggedIn={loggedIn} /> 
           }
         </>
       }
-      {type === "start-page" &&
+      {(type === "start-page" && !loggedIn) &&
         <ul className="navigation__menu navigation__menu_type_account">
           <li className="navigation__menu-item">
             { <NavLink to="/signup" 
