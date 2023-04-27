@@ -34,12 +34,12 @@ function App() {
   }
 
   function tokenCheck() {
-    const jwt = localStorage.getItem('jwt');
     if (jwt) {
       auth.checkToken(jwt)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
+            handleLogin();
+            navigate({ replace: false });
           }
         })
         .catch((error) => {
@@ -81,7 +81,6 @@ function App() {
 
   function handleBurgerClick() {
     setBurgerMenuOpen(true);
-    console.log('123');
   }
 
   function closeBurgerMenu() {
