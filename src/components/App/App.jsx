@@ -10,13 +10,18 @@ import NotFound from '../NotFound/NotFound';
 import useFormData from '../../hooks/useFormData';
 import { auth } from '../../utils/Auth';
 import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from '../../utils/MoviesApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { MoviesListContext } from '../../contexts/MoviesListContextProvider';
+import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
 import ProtectedRoute from '../../utils/ProtectedRoute';
 
 function App() {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [moviesList, setMoviesList] = useState([]);
+  const [moviesSearchResult, setMoviesSearchResult] = useState([]);
   const formData = useFormData();
   const navigate = useNavigate();
   const jwt = localStorage.getItem('jwt');
@@ -53,9 +58,10 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
-      mainApi.getCurrentUser(jwt)
-      .then((userData) => {
+      Promise.all([mainApi.getCurrentUser(jwt), moviesApi.getMoviesList()])
+      .then(([userData, movies]) => {
         setCurrentUser(userData);
+        setMoviesList(movies);
       })
       .catch((error) => {
         console.log(`Ошибка при получении данных: ${error}`);
@@ -95,6 +101,8 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
+    <MoviesListContext.Provider value={moviesList}>
+    <MoviesSearchResultContext.Provider value={{moviesSearchResult, setMoviesSearchResult}}>
       <div className="app">
         <Routes>
           <Route path="/" element={
@@ -109,14 +117,16 @@ function App() {
                             onBurgerClick={handleBurgerClick}
                             closeBurgerMenu={closeBurgerMenu}
                             onOverlayClick={handleMenuOverlayClick}
-                            loggedIn={loggedIn} /> }/>
+                            loggedIn={loggedIn}
+                            formData={formData} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
                             isBurgerMenuOpen={isBurgerMenuOpen}
                             onBurgerClick={handleBurgerClick}
                             closeBurgerMenu={closeBurgerMenu}
                             onOverlayClick={handleMenuOverlayClick}
-                            loggedIn={loggedIn} /> }/>
+                            loggedIn={loggedIn}
+                            formData={formData} /> }/>
           <Route path="/profile" element={
             <ProtectedRoute element={Profile}
                             isBurgerMenuOpen={isBurgerMenuOpen}
@@ -132,6 +142,8 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
+    </MoviesSearchResultContext.Provider>
+    </MoviesListContext.Provider>
     </CurrentUserContext.Provider>
   )
 }

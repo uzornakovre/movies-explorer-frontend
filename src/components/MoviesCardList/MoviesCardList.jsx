@@ -1,41 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import MoviesCard from '../MoviesCard/MoviesCard';
+import { useContext } from 'react';
+import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
 
-function MoviesCardList({ page }) {
-  // const MoviesCardElements = MoviesCards.map(moviesCard => (
-  //   <li key={moviesCard._id}>
-  //     <MoviesCard card={moviesCard} />
-  //   </li>
-  // ));
+function MoviesCardList({ page, onMoreClick }) {
+  const { moviesSearchResult } = useContext(MoviesSearchResultContext);
+  const moviesCardElements = moviesSearchResult.map(moviesCard => (
+    <li key={moviesCard.id}>
+      <MoviesCard card={moviesCard}
+                  page={page} />
+    </li>
+  ));
 
   return (
     <section className="movies" aria-label="Фильмы">
-      {/* временное рещение для сверки с макетом */}
-      {page === "movies" && 
-        <>
-          <ul className={`movies__list movies__list_page_${page}`}>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-            <li><MoviesCard page={page} /></li>
-          </ul>
-        </>
-      }
-      {page === "saved-movies" && 
-        <ul className={`movies__list movies__list_page_${page}`}>
-          <li><MoviesCard page={page} /></li>
-          <li><MoviesCard page={page} /></li>
-          <li><MoviesCard page={page} /></li>
-        </ul>
-      }
-      <button className={`movies__load-more movies__load-more_page_${page}`} type="button">Ещё</button>
+      <ul className="movies__list">
+        {moviesCardElements}
+      </ul>
+      <button className={`movies__load-more movies__load-more_page_${page}`}
+              type="button"
+              onClick={onMoreClick}>Ещё</button>
     </section>
   )
 }
