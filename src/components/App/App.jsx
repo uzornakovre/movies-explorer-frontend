@@ -11,6 +11,7 @@ import useFormData from '../../hooks/useFormData';
 import { auth } from '../../utils/Auth';
 import { mainApi } from '../../utils/MainApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../../utils/ProtectedRoute';
 
 function App() {
   const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
@@ -104,26 +105,29 @@ function App() {
                   onOverlayClick={handleMenuOverlayClick}
                   loggedIn={loggedIn} />}/>
           <Route path="/movies" element={
-            <Movies isBurgerMenuOpen={isBurgerMenuOpen}
-                    onBurgerClick={handleBurgerClick}
-                    closeBurgerMenu={closeBurgerMenu}
-                    onOverlayClick={handleMenuOverlayClick}
-                    loggedIn={loggedIn} /> }/>
+            <ProtectedRoute element={Movies}
+                            isBurgerMenuOpen={isBurgerMenuOpen}
+                            onBurgerClick={handleBurgerClick}
+                            closeBurgerMenu={closeBurgerMenu}
+                            onOverlayClick={handleMenuOverlayClick}
+                            loggedIn={loggedIn} /> }/>
           <Route path="/saved-movies" element={
-            <SavedMovies isBurgerMenuOpen={isBurgerMenuOpen}
-                        onBurgerClick={handleBurgerClick}
-                        closeBurgerMenu={closeBurgerMenu}
-                        onOverlayClick={handleMenuOverlayClick}
-                        loggedIn={loggedIn} /> }/>
+            <ProtectedRoute element={SavedMovies}
+                            isBurgerMenuOpen={isBurgerMenuOpen}
+                            onBurgerClick={handleBurgerClick}
+                            closeBurgerMenu={closeBurgerMenu}
+                            onOverlayClick={handleMenuOverlayClick}
+                            loggedIn={loggedIn} /> }/>
           <Route path="/profile" element={
-            <Profile isBurgerMenuOpen={isBurgerMenuOpen}
-                    onBurgerClick={handleBurgerClick}
-                    closeBurgerMenu={closeBurgerMenu}
-                    onOverlayClick={handleMenuOverlayClick}
-                    loggedIn={loggedIn}
-                    handleLogout={handleLogout}
-                    formData={formData}
-                    handleUpdateUser={handleUpdateUser} /> }/>
+            <ProtectedRoute element={Profile}
+                            isBurgerMenuOpen={isBurgerMenuOpen}
+                            onBurgerClick={handleBurgerClick}
+                            closeBurgerMenu={closeBurgerMenu}
+                            onOverlayClick={handleMenuOverlayClick}
+                            loggedIn={loggedIn}
+                            handleLogout={handleLogout}
+                            formData={formData}
+                            handleUpdateUser={handleUpdateUser} /> }/>
           <Route path="/signin" element={<Login formData={formData} handleLogin={handleLogin} />}/>
           <Route path="/signup" element={<Register formData={formData} />}/>
           <Route path="/*" element={<NotFound />} />
