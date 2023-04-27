@@ -14,6 +14,7 @@ function AuthFormField({ labelText, name, type, formData, page, placeholder }) {
              maxLength={40}
              required
              placeholder={placeholder}
+             autoComplete="on"
       ></input>
       <span className={`auth__form-input-error`}>{formData.errors[name]}</span>
     </fieldset>

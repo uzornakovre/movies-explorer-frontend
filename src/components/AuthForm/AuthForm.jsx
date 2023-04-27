@@ -52,6 +52,7 @@ function AuthForm({ type,
                        page={type}
                        formData={formData}
                        placeholder="Введите пароль"
+                       autoComplete="on"
         />
         {children}
         <span className="auth__error-tool-tip">{errorToolTip}</span>
