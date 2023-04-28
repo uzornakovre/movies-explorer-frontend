@@ -2,13 +2,15 @@ import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ card, page }) {
+function MoviesCard({ card, page, saveMovie }) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
 
   function handleSaveClick() {
     if (!isMovieSaved) {
       setIsMovieSaved(true);
+      console.log(card);
+      saveMovie(card);
     } else setIsMovieSaved(false);
   }
 

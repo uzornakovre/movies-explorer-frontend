@@ -1,30 +1,34 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import Main from '../Main/Main';
-import Movies from '../Movies/Movies';
-import Profile from '../Profile/Profile';
-import SavedMovies from '../SavedMovies/SavedMovies';
-import NotFound from '../NotFound/NotFound';
-import useFormData from '../../hooks/useFormData';
-import { auth } from '../../utils/Auth';
-import { mainApi } from '../../utils/MainApi';
-import { moviesApi } from '../../utils/MoviesApi';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { MoviesListContext } from '../../contexts/MoviesListContextProvider';
+import { useState, useEffect }       from 'react';
+import { Routes, 
+         Route, 
+         useNavigate }               from 'react-router-dom';
+import Register                      from '../Register/Register';
+import Login                         from '../Login/Login';
+import Main                          from '../Main/Main';
+import Movies                        from '../Movies/Movies';
+import Profile                       from '../Profile/Profile';
+import SavedMovies                   from '../SavedMovies/SavedMovies';
+import NotFound                      from '../NotFound/NotFound';
+import useFormData                   from '../../hooks/useFormData';
+import { auth }                      from '../../utils/Auth';
+import { mainApi }                   from '../../utils/MainApi';
+import { moviesApi }                 from '../../utils/MoviesApi';
+import { CurrentUserContext }        from '../../contexts/CurrentUserContext';
+import { MoviesListContext }         from '../../contexts/MoviesListContextProvider';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
-import ProtectedRoute from '../../utils/ProtectedRoute';
+import ProtectedRoute                from '../../utils/ProtectedRoute';
 
 function App() {
-  const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
-  const [moviesList, setMoviesList] = useState([]);
+  const [isBurgerMenuOpen,   setBurgerMenuOpen    ] = useState(false);
+  const [loggedIn,           setLoggedIn          ] = useState(false);
+  const [currentUser,        setCurrentUser       ] = useState({});
+  const [moviesList,         setMoviesList        ] = useState([]);
   const [moviesSearchResult, setMoviesSearchResult] = useState([]);
+  const [savedMovies,        setSavedMovies       ] = useState([]);
+
   const formData = useFormData();
   const navigate = useNavigate();
-  const jwt = localStorage.getItem('jwt');
+  const jwt      = localStorage.getItem('jwt');
 
   // Авторизация
 
@@ -83,6 +87,18 @@ function App() {
       })
   }
 
+  // Сохранение и удаление фильмов
+
+  function saveMovie(movieData) {
+    mainApi.saveMovie(movieData, jwt)
+      .then((savedMovie) => {
+        setSavedMovies([savedMovie, ...savedMovies]);
+      })
+      .catch((error) => {
+        console.log(`Ошибка при сохраниении фильма: ${error}`);
+      })
+  }
+
   // "Бургер"-меню
 
   function handleBurgerClick() {
@@ -118,7 +134,8 @@ function App() {
                             closeBurgerMenu={closeBurgerMenu}
                             onOverlayClick={handleMenuOverlayClick}
                             loggedIn={loggedIn}
-                            formData={formData} /> }/>
+                            formData={formData}
+                            saveMovie={saveMovie} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
                             isBurgerMenuOpen={isBurgerMenuOpen}

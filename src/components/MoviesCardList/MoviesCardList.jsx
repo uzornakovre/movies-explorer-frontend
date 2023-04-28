@@ -3,12 +3,13 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { useContext } from 'react';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
 
-function MoviesCardList({ page, onMoreClick }) {
+function MoviesCardList({ page, onMoreClick, saveMovie }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const moviesCardElements = moviesSearchResult.map(moviesCard => (
     <li key={moviesCard.id}>
       <MoviesCard card={moviesCard}
-                  page={page} />
+                  page={page}
+                  saveMovie={saveMovie} />
     </li>
   ));
 
