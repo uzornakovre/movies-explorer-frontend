@@ -19,7 +19,7 @@ function Login({ formData, handleLogin }) {
           name:     ''
         })
         handleLogin();
-        navigate('/', {replace: true});
+        navigate('/movies', {replace: true});
       })
       .catch((error) =>{
         setErrorToolTip('Неверный логин или пароль.');

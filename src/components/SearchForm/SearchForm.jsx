@@ -5,7 +5,7 @@ import { MoviesSearchResultContext } from "../../contexts/MoviesSearchResultCont
 
 function SearchForm({ moviesQuantity, formData }) {
   const moviesList = useContext(MoviesListContext);
-  const { moviesSearchResult, setMoviesSearchResult } = useContext(MoviesSearchResultContext);
+  const { setMoviesSearchResult } = useContext(MoviesSearchResultContext);
   let filteredMoviesList = [];
   const shortsRef = useRef();
 

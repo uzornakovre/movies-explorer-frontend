@@ -15,6 +15,7 @@ function Profile({ isBurgerMenuOpen,
 
   const currentUser = useContext(CurrentUserContext);
   const [errorToolTip, setErrorToolTip] = useState('Измените данные и нажмите "Редактировать"');
+  const [buttonEditState, setButtonEditState] = useState(true);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -23,10 +24,12 @@ function Profile({ isBurgerMenuOpen,
         email: formData.values.email
       });
       setErrorToolTip('Данные успешно обновлены');
+      setButtonEditState(false);
   }
 
   function handleInputClick() {
     setErrorToolTip('Измените данные и нажмите "Редактировать"');
+    setButtonEditState(true);
   }
  
   useEffect(() => {
@@ -36,6 +39,10 @@ function Profile({ isBurgerMenuOpen,
     })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
+
+  useEffect(() => {
+    setButtonEditState(false);
+  }, []);
 
   return (
     <>
@@ -86,7 +93,7 @@ function Profile({ isBurgerMenuOpen,
               ${errorToolTip === "Данные успешно обновлены" && "profile__error-tool-tip_success"}`}>{errorToolTip}</span>
             <button className={`profile__button profile__button_type_edit`}
                     type="submit"
-                    disabled={!formData.isValid || errorToolTip === "Данные успешно обновлены"}>Редактировать</button>
+                    disabled={!formData.isValid || !buttonEditState}>Редактировать</button>
             <button className="profile__button profile__button_type_logout"
                     type="button"
                     onClick={handleLogout}>Выйти из аккаунта</button>

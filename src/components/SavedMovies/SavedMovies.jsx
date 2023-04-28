@@ -8,7 +8,8 @@ function SavedMovies({ isBurgerMenuOpen,
                        onBurgerClick,
                        closeBurgerMenu,
                        onOverlayClick,
-                       loggedIn
+                       loggedIn,
+                       formData
                      }) {
   return (
     <>
@@ -18,7 +19,7 @@ function SavedMovies({ isBurgerMenuOpen,
               onBurgerClick={onBurgerClick}
               isBurgerMenuOpen={isBurgerMenuOpen} />
       <main className="content">
-        <SearchForm />
+        <SearchForm formData={formData}/>
         <MoviesCardList page="saved-movies"/>
       </main>
       <Footer />
