@@ -6,7 +6,7 @@ function useFormValues() {
   const [isValid, setIsValid] = useState(false);
 
   function handleChange(evt) {
-    const { value, name, changed } = evt.target;
+    const { value, name } = evt.target;
 
     setValues({
       ...values,
@@ -18,10 +18,7 @@ function useFormValues() {
       [name]: evt.target.validationMessage
     })
 
-    if (changed !== 0) {
-      console.log(0)
-      setIsValid(evt.target.closest('form').checkValidity());
-    } else setIsValid(false);
+    setIsValid(evt.target.closest('form').checkValidity());
   }
 
   function resetFormValues() {
