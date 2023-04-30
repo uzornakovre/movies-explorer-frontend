@@ -57,7 +57,7 @@ function App() {
     }
   }
 
-  // Получение данных с сервера о пользователе, проверка токена
+  // Получение данных с сервера о пользователе, карточках, проверка токена
 
   useEffect(() => {
     tokenCheck();
@@ -73,6 +73,14 @@ function App() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
+
+  useEffect(() => {
+    mainApi.getMovies(jwt)
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Обновление данных о пользователе
 
@@ -96,6 +104,17 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка при сохраниении фильма: ${error}`);
+      })
+  }
+
+  function deleteMovie(movie) {
+    console.log(movie._id)
+    mainApi.deleteMovie(movie._id, jwt)
+      .then(() => {
+        setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
+      })
+      .catch((error) => {
+        console.log(`Ошибка при удалении фильма: ${error}`);
       })
   }
 
@@ -135,7 +154,9 @@ function App() {
                             onOverlayClick={handleMenuOverlayClick}
                             loggedIn={loggedIn}
                             formData={formData}
-                            saveMovie={saveMovie} /> }/>
+                            saveMovie={saveMovie}
+                            deleteMovie={deleteMovie}
+                            savedMovies={savedMovies} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
                             isBurgerMenuOpen={isBurgerMenuOpen}
@@ -143,7 +164,9 @@ function App() {
                             closeBurgerMenu={closeBurgerMenu}
                             onOverlayClick={handleMenuOverlayClick}
                             loggedIn={loggedIn}
-                            formData={formData} /> }/>
+                            formData={formData}
+                            deleteMovie={deleteMovie}
+                            savedMovies={savedMovies}  /> }/>
           <Route path="/profile" element={
             <ProtectedRoute element={Profile}
                             isBurgerMenuOpen={isBurgerMenuOpen}

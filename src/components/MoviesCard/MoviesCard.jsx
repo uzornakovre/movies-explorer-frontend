@@ -2,16 +2,22 @@ import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ card, page, saveMovie }) {
+function MoviesCard({ card, page, saveMovie, deleteMovie }) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
 
   function handleSaveClick() {
     if (!isMovieSaved) {
       setIsMovieSaved(true);
-      console.log(card);
       saveMovie(card);
-    } else setIsMovieSaved(false);
+    } else {
+      setIsMovieSaved(false);
+      deleteMovie(card);
+    }
+  }
+
+  function handleDeleteClick() {
+    deleteMovie(card);
   }
 
   useEffect(() => {
@@ -21,9 +27,7 @@ function MoviesCard({ card, page, saveMovie }) {
       } else setButtonContent('Сохранить');
     }
     if (page === 'saved-movies') {
-      if (isMovieSaved) {
         setButtonContent(<img src={removeIcon} alt="Фильм добавлен" />)
-      } else setButtonContent('Сохранить');
     }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,12 +46,25 @@ function MoviesCard({ card, page, saveMovie }) {
         <p className="movies-card__duration">{duration}</p>
       </div>
       <a className="movies-card__trailer-link" href={card.trailerLink} target="blank">
-        <img className="movies-card__image" src={`https://api.nomoreparties.co${card.image.url}`} alt={`Обложка фильма ${card.nameRU}`} />
+        { page === 'movies' &&
+          <img className="movies-card__image" src={`https://api.nomoreparties.co${card.image.url}`} alt={`Обложка фильма ${card.nameRU}`} />
+        }
+        { page === 'saved-movies' &&
+          <img className="movies-card__image" src={card.image} alt={`Обложка фильма ${card.nameRU}`} />
+        }
       </a>
       <div className="movies-card__caption">
-        <button className={`movies-card__save-button ${(isMovieSaved && page === "movies") && "movies-card__save-button_active"}`}
-                type="button"
-                onClick={handleSaveClick}>{buttonContent}</button>
+        { page === 'movies' &&
+          <button className={`movies-card__save-button ${(isMovieSaved && page === "movies") && "movies-card__save-button_active"}`}
+                  type="button"
+                  onClick={handleSaveClick}>{buttonContent}</button>
+        }
+        { page === 'saved-movies' &&
+          <button className={`movies-card__save-button`}
+                  type="button"
+                  onClick={handleDeleteClick}>{buttonContent}</button>
+        }
+
       </div>
     </article>
   )

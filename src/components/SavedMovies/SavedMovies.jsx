@@ -9,7 +9,9 @@ function SavedMovies({ isBurgerMenuOpen,
                        closeBurgerMenu,
                        onOverlayClick,
                        loggedIn,
-                       formData
+                       formData,
+                       savedMovies,
+                       deleteMovie
                      }) {
   return (
     <>
@@ -20,7 +22,9 @@ function SavedMovies({ isBurgerMenuOpen,
               isBurgerMenuOpen={isBurgerMenuOpen} />
       <main className="content">
         <SearchForm formData={formData}/>
-        <MoviesCardList page="saved-movies"/>
+        <MoviesCardList page="saved-movies"
+                        savedMovies={savedMovies}
+                        deleteMovie={deleteMovie} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}

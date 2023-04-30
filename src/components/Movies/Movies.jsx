@@ -12,13 +12,14 @@ function Movies({ onBurgerClick,
                   onOverlayClick,
                   loggedIn,
                   formData,
-                  saveMovie
+                  saveMovie,
+                  deleteMovie,
+                  savedMovies
                 }) {
   const [moviesQuantity, setMoviesQuantity] = useState(3);
 
   function increaseMoviesQuantity() {
     setMoviesQuantity(moviesQuantity + 3);
-    console.log(moviesQuantity);
   }
 
   return (
@@ -33,7 +34,9 @@ function Movies({ onBurgerClick,
                     formData={formData} />
         <MoviesCardList page="movies"
                         onMoreClick={increaseMoviesQuantity}
-                        saveMovie={saveMovie} />
+                        saveMovie={saveMovie}
+                        deleteMovie={deleteMovie}
+                        savedMovies={savedMovies}  />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}
