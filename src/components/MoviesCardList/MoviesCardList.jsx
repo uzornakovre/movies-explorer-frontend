@@ -11,25 +11,26 @@ function MoviesCardList({ page,
                         }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
-  const moviesCardElements = moviesSearchResult.map(moviesCard => (
-    <li key={moviesCard.id}>
-      <MoviesCard card={moviesCard}
-                  page={page}
-                  saveMovie={saveMovie}
-                  deleteMovie={deleteMovie} />
-    </li>
-  ));
+  const [moviesCardElements, setMoviesCardElements] = useState([]);
 
-  useEffect(() => {
-    console.log(savedMovies)
-    setSavedMoviesCardElements(savedMovies.map(moviesCard => (
-      <li key={moviesCard._id}>
-        <MoviesCard card={moviesCard}
+  function renderCard(card) {
+    return (
+      <li key={(card.id && card.id) || card._id}>
+        <MoviesCard card={card}
                     page={page}
                     saveMovie={saveMovie}
                     deleteMovie={deleteMovie} />
-      </li>
-    )));
+    </li>
+    );
+  }
+
+  useEffect(() => {
+    setMoviesCardElements(moviesSearchResult.map(moviesCard => renderCard(moviesCard)));
+    setSavedMoviesCardElements(moviesSearchResult.map(moviesCard => renderCard(moviesCard)));
+  }, [moviesSearchResult]);
+
+  useEffect(() => {
+    setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
   }, [savedMovies]);
 
   return (

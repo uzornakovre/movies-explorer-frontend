@@ -3,23 +3,21 @@ import { useContext, useRef, useEffect } from "react";
 import { MoviesListContext } from "../../contexts/MoviesListContextProvider";
 import { MoviesSearchResultContext } from "../../contexts/MoviesSearchResultContext";
 
-function SearchForm({ moviesQuantity, formData }) {
+function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
   const moviesList = useContext(MoviesListContext);
   const { setMoviesSearchResult } = useContext(MoviesSearchResultContext);
-  let filteredMoviesList = [];
   const shortsRef = useRef();
+  let filteredMoviesList = [];
 
-  function filterByName(name) {
-    filteredMoviesList = moviesList.filter((movie) => {
+  function filterByName(name, list) {
+    filteredMoviesList = list.filter((movie) => {
       return movie.nameRU.includes(name) || movie.nameEN.includes(name);
     });
   }
 
   function filterByDuration(isOn) {
     if (!isOn) {
-      filteredMoviesList = filteredMoviesList.filter((movie) => {
-        return movie.duration > 40;
-      })
+      filteredMoviesList = filteredMoviesList.filter((movie) => movie.duration > 40);
     }
   }
 
@@ -34,19 +32,24 @@ function SearchForm({ moviesQuantity, formData }) {
     setMoviesSearchResult(result);
   }
 
-  function handleSearchSubmit(evt) {
-    evt.preventDefault();
+  function renderCards() {
     setMoviesSearchResult([]);
-    filterByName(formData.values.search);
+
+    if (page === 'movies') {
+      filterByName(formData.values.search, moviesList);
+    } else filterByName(formData.values.search, savedMovies);
+
     filterByDuration(shortsRef.current.checked);
     createResult();
   }
 
+  function handleSearchSubmit(evt) {
+    evt.preventDefault();
+    renderCards();
+  }
+
   useEffect(() => {
-    setMoviesSearchResult([]);
-    filterByName(formData.values.search);
-    filterByDuration(shortsRef.current.checked);
-    createResult();
+    renderCards();
   }, [moviesQuantity]);
 
   return (

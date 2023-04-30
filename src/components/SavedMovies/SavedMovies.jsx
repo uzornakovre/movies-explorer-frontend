@@ -21,7 +21,10 @@ function SavedMovies({ isBurgerMenuOpen,
               onBurgerClick={onBurgerClick}
               isBurgerMenuOpen={isBurgerMenuOpen} />
       <main className="content">
-        <SearchForm formData={formData}/>
+        <SearchForm formData={formData}
+                    savedMovies={savedMovies}
+                    page="saved-movies" 
+                    moviesQuantity={1000}/>
         <MoviesCardList page="saved-movies"
                         savedMovies={savedMovies}
                         deleteMovie={deleteMovie} />

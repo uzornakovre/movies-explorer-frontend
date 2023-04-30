@@ -16,7 +16,7 @@ function Movies({ onBurgerClick,
                   deleteMovie,
                   savedMovies
                 }) {
-  const [moviesQuantity, setMoviesQuantity] = useState(3);
+  const [moviesQuantity, setMoviesQuantity] = useState(12);
 
   function increaseMoviesQuantity() {
     setMoviesQuantity(moviesQuantity + 3);
@@ -31,7 +31,9 @@ function Movies({ onBurgerClick,
               isBurgerMenuOpen={isBurgerMenuOpen} />
       <main className="content">
         <SearchForm moviesQuantity={moviesQuantity}
-                    formData={formData} />
+                    formData={formData}
+                    page="movies"
+                    savedMovies={savedMovies} />
         <MoviesCardList page="movies"
                         onMoreClick={increaseMoviesQuantity}
                         saveMovie={saveMovie}
