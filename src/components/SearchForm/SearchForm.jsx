@@ -63,6 +63,7 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
                  onChange={formData.handleChange}
                  value={formData.values.search || ''}
                  minLength="1"
+                 autoComplete="off"
                  required></input>
           <button className="search-form__submit" type="submit">Найти</button>
         </fieldset>

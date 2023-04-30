@@ -57,6 +57,12 @@
     border-radius: 50px;
     background-color: transparent;
 
+    &:focus {
+      background-color: transparent;
+      outline: none;
+      border-color: #2BE080;
+    }
+
     &::placeholder {
       color: #A0A0A0;
     }
