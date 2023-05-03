@@ -14,7 +14,7 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
   function filterByName(name, list) {
     page === 'movies' ? data = {...data, input: name} : data = {...data};
     filteredMoviesList = list.filter((movie) => {
-      return movie.nameRU.includes(name) || movie.nameEN.includes(name);
+      return movie.nameRU.toLowerCase().includes(name) || movie.nameEN.toLowerCase().includes(name);
     });
   }
 
