@@ -12,6 +12,7 @@ function MoviesCardList({ page,
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
+  const searchData = JSON.parse(localStorage.getItem('searchData'));
 
   function renderCard(card) {
     return (
@@ -25,7 +26,7 @@ function MoviesCardList({ page,
   }
 
   useEffect(() => {
-    setMoviesCardElements(moviesSearchResult.map(moviesCard => renderCard(moviesCard)));
+    setMoviesCardElements(searchData.result.map(moviesCard => renderCard(moviesCard)));
     setSavedMoviesCardElements(moviesSearchResult.map(moviesCard => renderCard(moviesCard)));
   }, [moviesSearchResult]);
 

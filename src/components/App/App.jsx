@@ -26,9 +26,9 @@ function App() {
   const [moviesSearchResult, setMoviesSearchResult] = useState([]);
   const [savedMovies,        setSavedMovies       ] = useState([]);
 
-  const formData = useFormData();
-  const navigate = useNavigate();
-  const jwt      = localStorage.getItem('jwt');
+  const formData   = useFormData();
+  const navigate   = useNavigate();
+  const jwt        = localStorage.getItem('jwt');
 
   // Авторизация
 

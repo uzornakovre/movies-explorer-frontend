@@ -9,7 +9,10 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
   const shortsRef = useRef();
   let filteredMoviesList = [];
 
+  let data = {};
+
   function filterByName(name, list) {
+    page === 'movies' ? data = {...data, input: name} : data = {...data};
     filteredMoviesList = list.filter((movie) => {
       return movie.nameRU.includes(name) || movie.nameEN.includes(name);
     });
@@ -18,6 +21,9 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
   function filterByDuration(isOn) {
     if (!isOn) {
       filteredMoviesList = filteredMoviesList.filter((movie) => movie.duration > 40);
+      page === 'movies' ? data = {...data, filterShorts: !isOn } : data = {...data};
+    } else {
+      page === 'movies' ? data = {...data, filterShorts: !isOn } : data = {...data};
     }
   }
 
@@ -30,6 +36,7 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
     }
 
     setMoviesSearchResult(result);
+    page === 'movies' ? data = {...data, result: result} : data = {...data};
   }
 
   function renderCards() {
@@ -46,11 +53,24 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
   function handleSearchSubmit(evt) {
     evt.preventDefault();
     renderCards();
+    if (page === 'movies') {
+      localStorage.setItem('searchData', JSON.stringify(data));
+    }
   }
 
   useEffect(() => {
     renderCards();
   }, [moviesQuantity]);
+
+  useEffect(() => {
+    const searchData = JSON.parse(localStorage.getItem('searchData'));
+    
+    if (page === 'saved-movies') formData.values.search = '';
+    if (page === 'movies') { 
+      formData.values.search = searchData.input;
+      shortsRef.current.checked = !searchData.filterShorts;
+    }
+  }, []);
 
   return (
     <section className="search-form" aria-label="Форма поиска">
