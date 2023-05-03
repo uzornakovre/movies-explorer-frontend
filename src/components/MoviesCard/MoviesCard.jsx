@@ -2,17 +2,28 @@ import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ card, page, saveMovie, deleteMovie }) {
+function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
+  const [currentMovie] = useState(
+    savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN)
+  ); 
+
+  useState(() => {
+    if (page === 'movies' && currentMovie) {
+      const isMovieSaved = savedMovies.some(movie => movie._id === currentMovie._id);
+      setIsMovieSaved(isMovieSaved);
+    }
+  }, [savedMovies]);
 
   function handleSaveClick() {
+    console.log(currentMovie);
     if (!isMovieSaved) {
-      setIsMovieSaved(true);
       saveMovie(card);
+      setIsMovieSaved(true);
     } else {
+      deleteMovie(currentMovie);
       setIsMovieSaved(false);
-      deleteMovie(card);
     }
   }
 

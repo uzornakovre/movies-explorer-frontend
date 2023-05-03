@@ -108,7 +108,6 @@ function App() {
   }
 
   function deleteMovie(movie) {
-    console.log(movie._id)
     mainApi.deleteMovie(movie._id, jwt)
       .then(() => {
         setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));

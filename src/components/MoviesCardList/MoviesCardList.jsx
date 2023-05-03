@@ -20,7 +20,8 @@ function MoviesCardList({ page,
         <MoviesCard card={card}
                     page={page}
                     saveMovie={saveMovie}
-                    deleteMovie={deleteMovie} />
+                    deleteMovie={deleteMovie}
+                    savedMovies={savedMovies} />
     </li>
     );
   }
