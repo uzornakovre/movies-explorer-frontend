@@ -37,7 +37,7 @@ function App() {
   const [moviesSearchResult, setMoviesSearchResult] = useState({
     movies: moviesSearchData.result || [],
     savedMovies: savedMoviesSearchData.result || [],
-    filteredMoviesList: moviesSearchData.filteredMoviesList || []
+    filteredMoviesList: moviesSearchData.filtered || []
   });
   
   const formData   = useFormData();
@@ -58,8 +58,8 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
-    localStorage.removeItem('moviesSearchData', JSON.stringify(searchData));
-    localStorage.removeItem('savedMoviesSearchData', JSON.stringify(searchData));
+    localStorage.removeItem('moviesSearchData');
+    localStorage.removeItem('savedMoviesSearchData');
     navigate('/', {replace: true});
   }
 

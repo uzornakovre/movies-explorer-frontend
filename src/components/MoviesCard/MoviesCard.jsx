@@ -7,7 +7,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
   // const { isLoading } = useContext(IsLoadingContext);
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
-  const [currentMovie] = useState(
+  const [currentMovie, setCurrentMovie] = useState(
     savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN)
   );
 
@@ -38,6 +38,8 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
   }
 
   useEffect(() => {
+    setCurrentMovie(savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN));
+    
     if (page === 'movies') {
       if (isMovieSaved) {
         setButtonContent(<img src={checkMark} alt="Фильм добавлен" />)

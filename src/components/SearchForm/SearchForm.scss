@@ -78,6 +78,16 @@
     }
   }
 
+  &__error {
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    line-height: 1.64;
+    color: #EE3465;
+  }
+
   &__submit {
     position: absolute;
     top: 50%;

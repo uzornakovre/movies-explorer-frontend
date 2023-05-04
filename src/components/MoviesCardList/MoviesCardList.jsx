@@ -11,14 +11,14 @@ function MoviesCardList({ page,
                           saveMovie,
                           deleteMovie,
                           savedMovies,
+                          moviesQuantity
                         }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const { isLoading } = useContext(IsLoadingContext);
   const { searched } = useContext(SearchedContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
-  const notFoundError = (<span className="movies__not-found">Ничего не найдено</span>);
-  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
+  const notFoundError = (<span className="movies__error">Ничего не найдено</span>);
 
   function renderCard(card) {
     return (
@@ -36,12 +36,10 @@ function MoviesCardList({ page,
     setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
   }, [savedMovies]);
 
-  // useEffect(() => {
-  //   setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
-  // }, []);
-
   useEffect(() => {
-    setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
+    if (searched.movies) {
+      setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
+    }
     if (searched.savedMovies) {
       setSavedMoviesCardElements(moviesSearchResult.savedMovies.map(moviesCard => renderCard(moviesCard)));
     }
@@ -56,7 +54,8 @@ function MoviesCardList({ page,
         {page === 'movies' && moviesCardElements}
         {page === 'savedMovies' && savedMoviesCardElements}
       </ul>
-      {moviesSearchResult.filteredMoviesList.length > 12 && 
+      {(moviesSearchResult.filteredMoviesList.length > 12 &&
+        moviesCardElements.length !== 0) && 
         <button className={`movies__load-more movies__load-more_page_${page}`}
                 type="button"
                 onClick={onMoreClick}>Ещё</button>

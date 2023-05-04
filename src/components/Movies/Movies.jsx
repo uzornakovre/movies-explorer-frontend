@@ -67,7 +67,8 @@ function Movies({ onBurgerClick,
                         onMoreClick={increaseMoviesQuantity}
                         saveMovie={saveMovie}
                         deleteMovie={deleteMovie}
-                        savedMovies={savedMovies} />
+                        savedMovies={savedMovies}
+                        moviesQuantity={moviesQuantity} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}

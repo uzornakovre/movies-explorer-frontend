@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect, useState } from "react";
 import { MoviesListContext } from "../../contexts/MoviesListContextProvider";
 import { MoviesSearchResultContext } from "../../contexts/MoviesSearchResultContext";
 import { SearchedContext } from "../../contexts/SearchedContext";
@@ -12,6 +12,7 @@ function SearchForm({ moviesQuantity,
   const moviesList = useContext(MoviesListContext);
   const { searched, setSearched } = useContext(SearchedContext);
   const { moviesSearchResult, setMoviesSearchResult } = useContext(MoviesSearchResultContext);
+  const [searchError, setSearchError] = useState(false);
   const shortsRef = useRef();
   let filteredMoviesList = [];
 
@@ -82,9 +83,14 @@ function SearchForm({ moviesQuantity,
 
   function handleSearchSubmit(evt) {
     evt.preventDefault();
-    renderCards(page);
-    storeData();
-    setSearched({ ...searched, [page]: true });
+    if (formData.values.search !== '') {
+      setSearchError(false);
+      renderCards(page);
+      storeData();
+      setSearched({ ...searched, [page]: true });
+    } else {
+      setSearchError(true);
+    }
   }
 
   useEffect(() => {
@@ -118,6 +124,7 @@ function SearchForm({ moviesQuantity,
                  minLength="1"
                  autoComplete="off"
                  required></input>
+          {searchError && <span className="search-form__error">Нужно ввести ключевое слово</span>}
           <button className="search-form__submit" type="submit">Найти</button>
         </fieldset>
         <fieldset className="search-form__filter">
