@@ -92,7 +92,6 @@ function SearchForm({ moviesQuantity,
   }, [moviesQuantity]);
 
   useEffect(() => {
-    console.log(moviesSearchResult);
     const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { input: '' };
     const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { input: '' };
     

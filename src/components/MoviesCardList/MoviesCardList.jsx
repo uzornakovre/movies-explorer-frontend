@@ -18,6 +18,7 @@ function MoviesCardList({ page,
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
   const notFoundError = (<span className="movies__not-found">Ничего не найдено</span>);
+  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
 
   function renderCard(card) {
     return (
@@ -35,14 +36,12 @@ function MoviesCardList({ page,
     setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
   }, [savedMovies]);
 
-  useEffect(() => {
-    setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
-  }, []);
+  // useEffect(() => {
+  //   setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
+  // }, []);
 
   useEffect(() => {
-    if (moviesSearchResult.movies.length !== 0) {
-      setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
-    }
+    setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
     if (searched.savedMovies) {
       setSavedMoviesCardElements(moviesSearchResult.savedMovies.map(moviesCard => renderCard(moviesCard)));
     }
