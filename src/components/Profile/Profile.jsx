@@ -2,6 +2,7 @@ import Header from '../Header/Header';
 import Menu from '../Menu/Menu';
 import { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
 function Profile({ isBurgerMenuOpen,
                    onBurgerClick,
@@ -14,6 +15,7 @@ function Profile({ isBurgerMenuOpen,
                  }) {
 
   const currentUser = useContext(CurrentUserContext);
+  const { isLoading } = useContext(IsLoadingContext);
   const [errorToolTip, setErrorToolTip] = useState('Измените данные и нажмите "Редактировать"');
   const [buttonEditState, setButtonEditState] = useState(true);
 
@@ -93,7 +95,8 @@ function Profile({ isBurgerMenuOpen,
               ${errorToolTip === "Данные успешно обновлены" && "profile__error-tool-tip_success"}`}>{errorToolTip}</span>
             <button className={`profile__button profile__button_type_edit`}
                     type="submit"
-                    disabled={!formData.isValid || !buttonEditState}>Редактировать</button>
+                    disabled={!formData.isValid || !buttonEditState}>
+                      {isLoading && '...'}{!isLoading && 'Редактировать'}</button>
             <button className="profile__button profile__button_type_logout"
                     type="button"
                     onClick={handleLogout}>Выйти из аккаунта</button>
