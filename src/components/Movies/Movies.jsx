@@ -4,7 +4,6 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Menu from '../Menu/Menu';
 import { useState } from 'react';
-// import Preloader from '../Preloader/Preloader';
 
 function Movies({ onBurgerClick,
                   isBurgerMenuOpen,
@@ -14,7 +13,9 @@ function Movies({ onBurgerClick,
                   formData,
                   saveMovie,
                   deleteMovie,
-                  savedMovies
+                  savedMovies,
+                  isLoading,
+                  searchData
                 }) {
   const [moviesQuantity, setMoviesQuantity] = useState(12);
 
@@ -33,12 +34,14 @@ function Movies({ onBurgerClick,
         <SearchForm moviesQuantity={moviesQuantity}
                     formData={formData}
                     page="movies"
-                    savedMovies={savedMovies} />
+                    savedMovies={savedMovies}
+                    searchData={searchData} />
         <MoviesCardList page="movies"
                         onMoreClick={increaseMoviesQuantity}
                         saveMovie={saveMovie}
                         deleteMovie={deleteMovie}
-                        savedMovies={savedMovies}  />
+                        savedMovies={savedMovies} 
+                        isLoading={isLoading} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}

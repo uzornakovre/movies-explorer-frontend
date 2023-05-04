@@ -2,32 +2,52 @@
 import { useContext, useRef, useEffect } from "react";
 import { MoviesListContext } from "../../contexts/MoviesListContextProvider";
 import { MoviesSearchResultContext } from "../../contexts/MoviesSearchResultContext";
+import { SearchedContext } from "../../contexts/SearchedContext";
 
-function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
+function SearchForm({ moviesQuantity,
+                      formData,
+                      page,
+                      savedMovies,
+                      searchData
+                    }) {
   const moviesList = useContext(MoviesListContext);
+  const { searched, setSearched } = useContext(SearchedContext);
   const { setMoviesSearchResult } = useContext(MoviesSearchResultContext);
   const shortsRef = useRef();
   let filteredMoviesList = [];
 
-  let data = {};
+  let data = {
+    movies: {
+      input: '',
+      result: [],
+      filterShorts: false
+    },
+    savedMovies: {
+      input: '',
+      result: [],
+      filterShorts: false
+    }
+  };
 
-  function filterByName(name, list) {
-    page === 'movies' ? data = {...data, input: name} : data = {...data};
+  // localStorage.setItem('moviesSearchData', JSON.stringify(data.movies));
+
+  function filterByName(name, list, page) {
+    data[page] = {...data[page], input: name};
     filteredMoviesList = list.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(name) || movie.nameEN.toLowerCase().includes(name);
     });
   }
 
-  function filterByDuration(isOn) {
+  function filterByDuration(isOn, page) {
+    data[page] = {...data[page], filterShorts: !isOn };
+
     if (!isOn) {
       filteredMoviesList = filteredMoviesList.filter((movie) => movie.duration > 40);
-      page === 'movies' ? data = {...data, filterShorts: !isOn } : data = {...data};
-    } else {
-      page === 'movies' ? data = {...data, filterShorts: !isOn } : data = {...data};
+      data[page] = {...data[page], filterShorts: !isOn };
     }
   }
 
-  function createResult() {
+  function createResult(page) {
     let result = [];
 
     for (let i = 0; i < (moviesQuantity >= filteredMoviesList.length
@@ -36,39 +56,52 @@ function SearchForm({ moviesQuantity, formData, page, savedMovies }) {
     }
 
     setMoviesSearchResult(result);
-    page === 'movies' ? data = {...data, result: result} : data = {...data};
+    data[page] = {...data[page], result: result};
   }
 
-  function renderCards() {
+  function renderCards(page) {
     setMoviesSearchResult([]);
 
     if (page === 'movies') {
-      filterByName(formData.values.search, moviesList);
-    } else filterByName(formData.values.search, savedMovies);
+      filterByName(formData.values.search, moviesList, page);
+    } 
+    if (page === 'savedMovies') {
+      filterByName(formData.values.search, savedMovies, page);
+    }
 
-    filterByDuration(shortsRef.current.checked);
-    createResult();
+    filterByDuration(shortsRef.current.checked, page);
+    createResult(page);
   }
 
   function handleSearchSubmit(evt) {
     evt.preventDefault();
-    renderCards();
+    renderCards(page);
+
     if (page === 'movies') {
-      localStorage.setItem('searchData', JSON.stringify(data));
+      localStorage.setItem('moviesSearchData', JSON.stringify(data.movies));
     }
+    if (page === 'savedMovies') {
+      localStorage.setItem('savedMoviesSearchData', JSON.stringify(data.savedMovies));
+    }
+
+    setSearched({ ...searched, [page]: true });
   }
 
   useEffect(() => {
-    renderCards();
+    renderCards(page);
   }, [moviesQuantity]);
 
   useEffect(() => {
-    const searchData = JSON.parse(localStorage.getItem('searchData'));
+    const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { input: '' };
+    const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { input: '' };
     
-    if (page === 'saved-movies') formData.values.search = '';
+    if (page === 'savedMovies') {
+      formData.values.search = savedMoviesSearchData.input;
+      shortsRef.current.checked = !savedMoviesSearchData.filterShorts;
+    }
     if (page === 'movies') { 
-      formData.values.search = searchData.input;
-      shortsRef.current.checked = !searchData.filterShorts;
+      formData.values.search = moviesSearchData.input;
+      shortsRef.current.checked = !moviesSearchData.filterShorts;
     }
   }, []);
 

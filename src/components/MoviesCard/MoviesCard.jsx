@@ -37,7 +37,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
         setButtonContent(<img src={checkMark} alt="Фильм добавлен" />)
       } else setButtonContent('Сохранить');
     }
-    if (page === 'saved-movies') {
+    if (page === 'savedMovies') {
         setButtonContent(<img src={removeIcon} alt="Фильм добавлен" />)
     }
 
@@ -60,7 +60,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
         { page === 'movies' &&
           <img className="movies-card__image" src={`https://api.nomoreparties.co${card.image.url}`} alt={`Обложка фильма ${card.nameRU}`} />
         }
-        { page === 'saved-movies' &&
+        { page === 'savedMovies' &&
           <img className="movies-card__image" src={card.image} alt={`Обложка фильма ${card.nameRU}`} />
         }
       </a>
@@ -70,7 +70,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
                   type="button"
                   onClick={handleSaveClick}>{buttonContent}</button>
         }
-        { page === 'saved-movies' &&
+        { page === 'savedMovies' &&
           <button className={`movies-card__save-button`}
                   type="button"
                   onClick={handleDeleteClick}>{buttonContent}</button>

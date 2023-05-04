@@ -2,17 +2,23 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useContext, useEffect, useState } from 'react';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
+import { SearchedContext } from '../../contexts/SearchedContext';
+import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ page,
                           onMoreClick,
                           saveMovie,
                           deleteMovie,
-                          savedMovies 
+                          savedMovies,
+                          isLoading 
                         }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
+  const { searched } = useContext(SearchedContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
-  const searchData = JSON.parse(localStorage.getItem('searchData'));
+  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
+  const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { result: [] };
+  const notFoundError = (<span className="movies__not-found">Ничего не найдено</span>);
 
   function renderCard(card) {
     return (
@@ -27,19 +33,25 @@ function MoviesCardList({ page,
   }
 
   useEffect(() => {
-    setMoviesCardElements(searchData.result.map(moviesCard => renderCard(moviesCard)));
-    setSavedMoviesCardElements(moviesSearchResult.map(moviesCard => renderCard(moviesCard)));
-  }, [moviesSearchResult]);
+    setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
+  }, []);
 
   useEffect(() => {
-    setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
-  }, [savedMovies]);
+    console.log(searched)
+    setMoviesCardElements(moviesSearchData.result.map(moviesCard => renderCard(moviesCard)));
+    if (searched.savedMovies) {
+      setSavedMoviesCardElements(savedMoviesSearchData.result.map(moviesCard => renderCard(moviesCard)));
+    }
+  }, [moviesSearchResult]);
 
   return (
     <section className="movies" aria-label="Фильмы">
+      {(moviesSearchResult.length === 0 && page === 'movies' && searched.movies) && notFoundError}
+      {(moviesSearchResult.length === 0 && page === 'savedMovies' && searched.savedMovies) && notFoundError}
+      {isLoading && <Preloader />}
       <ul className="movies__list">
         {page === 'movies' && moviesCardElements}
-        {page === 'saved-movies' && savedMoviesCardElements}
+        {page === 'savedMovies' && savedMoviesCardElements}
       </ul>
       <button className={`movies__load-more movies__load-more_page_${page}`}
               type="button"

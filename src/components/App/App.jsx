@@ -16,6 +16,7 @@ import { moviesApi }                 from '../../utils/MoviesApi';
 import { CurrentUserContext }        from '../../contexts/CurrentUserContext';
 import { MoviesListContext }         from '../../contexts/MoviesListContextProvider';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
+import { SearchedContext }           from '../../contexts/SearchedContext';
 import ProtectedRoute                from '../../utils/ProtectedRoute';
 
 function App() {
@@ -25,10 +26,18 @@ function App() {
   const [moviesList,         setMoviesList        ] = useState([]);
   const [moviesSearchResult, setMoviesSearchResult] = useState([]);
   const [savedMovies,        setSavedMovies       ] = useState([]);
+  const [isLoading,          setIsLoading         ] = useState(false);
+  const [searched,           setSearched          ] = useState({ movies: false,
+                                                                 savedMovies: false });
 
   const formData   = useFormData();
   const navigate   = useNavigate();
   const jwt        = localStorage.getItem('jwt');
+  const searchData = {
+    input: '',
+    result: [],
+    filterShorts: false
+  }
 
   // Авторизация
 
@@ -39,6 +48,8 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('moviesSearchData', JSON.stringify(searchData));
+    localStorage.removeItem('savedMoviesSearchData', JSON.stringify(searchData));
     navigate('/', {replace: true});
   }
 
@@ -68,17 +79,24 @@ function App() {
         setMoviesList(movies);
       })
       .catch((error) => {
-        console.log(`Ошибка при получении данных: ${error}`);
+        console.log('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
       });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
 
   useEffect(() => {
+    setIsLoading(true);
     mainApi.getMovies(jwt)
       .then((movies) => {
         setSavedMovies(movies);
       })
+      .catch((error) => {
+        console.log(`Ошибка при получении фильмов: ${error}`);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -137,6 +155,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
     <MoviesListContext.Provider value={moviesList}>
     <MoviesSearchResultContext.Provider value={{moviesSearchResult, setMoviesSearchResult}}>
+    <SearchedContext.Provider value = {{searched, setSearched}}>
       <div className="app">
         <Routes>
           <Route path="/" element={
@@ -155,7 +174,9 @@ function App() {
                             formData={formData}
                             saveMovie={saveMovie}
                             deleteMovie={deleteMovie}
-                            savedMovies={savedMovies} /> }/>
+                            savedMovies={savedMovies}
+                            isLoading={isLoading}
+                            searchData={searchData} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
                             isBurgerMenuOpen={isBurgerMenuOpen}
@@ -165,7 +186,9 @@ function App() {
                             loggedIn={loggedIn}
                             formData={formData}
                             deleteMovie={deleteMovie}
-                            savedMovies={savedMovies}  /> }/>
+                            savedMovies={savedMovies}
+                            isLoading={isLoading}
+                            searchData={searchData} /> }/>
           <Route path="/profile" element={
             <ProtectedRoute element={Profile}
                             isBurgerMenuOpen={isBurgerMenuOpen}
@@ -181,6 +204,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
+    </SearchedContext.Provider>
     </MoviesSearchResultContext.Provider>
     </MoviesListContext.Provider>
     </CurrentUserContext.Provider>

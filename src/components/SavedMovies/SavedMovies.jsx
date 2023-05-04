@@ -11,11 +11,13 @@ function SavedMovies({ isBurgerMenuOpen,
                        loggedIn,
                        formData,
                        savedMovies,
-                       deleteMovie
+                       deleteMovie,
+                       isLoading,
+                       searchData
                      }) {
   return (
     <>
-      <Header page="saved-movies"
+      <Header page="savedMovies"
               type="logged-in"
               loggedIn={loggedIn}
               onBurgerClick={onBurgerClick}
@@ -23,16 +25,18 @@ function SavedMovies({ isBurgerMenuOpen,
       <main className="content">
         <SearchForm formData={formData}
                     savedMovies={savedMovies}
-                    page="saved-movies" 
-                    moviesQuantity={1000}/>
-        <MoviesCardList page="saved-movies"
+                    page="savedMovies" 
+                    moviesQuantity={1000} 
+                    searchData={searchData} />
+        <MoviesCardList page="savedMovies"
                         savedMovies={savedMovies}
-                        deleteMovie={deleteMovie} />
+                        deleteMovie={deleteMovie}
+                        isLoading={isLoading} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}
             closeBurgerMenu={closeBurgerMenu}
-            page="saved-movies"
+            page="savedMovies"
             loggedIn={loggedIn}
             onOverlayClick={onOverlayClick} />
     </>
