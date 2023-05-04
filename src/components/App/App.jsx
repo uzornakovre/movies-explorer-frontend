@@ -38,8 +38,8 @@ function App() {
     movies: moviesSearchData.result || [],
     savedMovies: savedMoviesSearchData.result || [],
     filteredMoviesList: moviesSearchData.filteredMoviesList || []
-  });                                                                 
-
+  });
+  
   const formData   = useFormData();
   const navigate   = useNavigate();
   const jwt        = localStorage.getItem('jwt');

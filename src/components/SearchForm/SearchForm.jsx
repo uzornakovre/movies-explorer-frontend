@@ -55,16 +55,10 @@ function SearchForm({ moviesQuantity,
     }
 
     setMoviesSearchResult({ ...moviesSearchResult, [page]: result, filteredMoviesList: filteredMoviesList });
-    // data[page] = {...data[page], result: result};
     data[page] = {...data[page], filtered: filteredMoviesList};
   }
 
   function renderCards(page) {
-    // setMoviesSearchResult({ 
-    //   movies: [],
-    //   savedMovies: [],
-    //   ...filteredMoviesList 
-    // });
 
     if (page === 'movies') {
       filterByName(formData.values.search, moviesList, page);
@@ -95,9 +89,6 @@ function SearchForm({ moviesQuantity,
 
   useEffect(() => {
     renderCards(page);
-    // if (data.movies.result.length > 0) {
-    //   storeData();
-    // }
   }, [moviesQuantity]);
 
   useEffect(() => {

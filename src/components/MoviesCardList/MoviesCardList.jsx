@@ -2,7 +2,6 @@
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useContext, useEffect, useState } from 'react';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
-// import { MoviesListContext } from "../../contexts/MoviesListContextProvider";
 import { SearchedContext } from '../../contexts/SearchedContext';
 import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 import Preloader from '../Preloader/Preloader';
@@ -16,11 +15,8 @@ function MoviesCardList({ page,
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const { isLoading } = useContext(IsLoadingContext);
   const { searched } = useContext(SearchedContext);
-  // const moviesList = useContext(MoviesListContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
-  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
-  const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { result: [] };
   const notFoundError = (<span className="movies__not-found">Ничего не найдено</span>);
 
   function renderCard(card) {
@@ -39,22 +35,14 @@ function MoviesCardList({ page,
     setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
   }, [savedMovies]);
 
-  // useEffect(() => {
-  //   // let visibleMovies = [];
-
-  //   // for (let i = 0; i < 12; i++) {
-  //   //   visibleMovies.push(moviesSearchData.result[i]);
-  //   // }
-
-  //   // setMoviesCardElements(visibleMovies.map(moviesCard => renderCard(moviesCard)));
-  //   setMoviesCardElements(moviesSearchData.result.map(moviesCard => renderCard(moviesCard)));
-  //   if (searched.savedMovies) {
-  //     setSavedMoviesCardElements(savedMoviesSearchData.result.map(moviesCard => renderCard(moviesCard)));
-  //   }
-  // }, [moviesSearchResult]);
-
   useEffect(() => {
     setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
+  }, []);
+
+  useEffect(() => {
+    if (moviesSearchResult.movies.length !== 0) {
+      setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
+    }
     if (searched.savedMovies) {
       setSavedMoviesCardElements(moviesSearchResult.savedMovies.map(moviesCard => renderCard(moviesCard)));
     }
