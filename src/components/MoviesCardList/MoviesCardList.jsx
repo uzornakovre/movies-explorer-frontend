@@ -3,6 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import { useContext, useEffect, useState } from 'react';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
 import { SearchedContext } from '../../contexts/SearchedContext';
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 import Preloader from '../Preloader/Preloader';
 
 function MoviesCardList({ page,
@@ -10,9 +11,9 @@ function MoviesCardList({ page,
                           saveMovie,
                           deleteMovie,
                           savedMovies,
-                          isLoading 
                         }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
+  const { isLoading } = useContext(IsLoadingContext);
   const { searched } = useContext(SearchedContext);
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);

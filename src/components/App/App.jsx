@@ -17,6 +17,7 @@ import { CurrentUserContext }        from '../../contexts/CurrentUserContext';
 import { MoviesListContext }         from '../../contexts/MoviesListContextProvider';
 import { MoviesSearchResultContext } from '../../contexts/MoviesSearchResultContext';
 import { SearchedContext }           from '../../contexts/SearchedContext';
+import { IsLoadingContext }          from '../../contexts/IsLoadingContext';
 import ProtectedRoute                from '../../utils/ProtectedRoute';
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
 
   function tokenCheck() {
     if (jwt) {
+      setIsLoading(true);
       auth.checkToken(jwt)
         .then((res) => {
           if (res) {
@@ -65,6 +67,9 @@ function App() {
         .catch((error) => {
           console.log(`Ошибка при получении данных: ${error}`);
         })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   }
 
@@ -156,6 +161,7 @@ function App() {
     <MoviesListContext.Provider value={moviesList}>
     <MoviesSearchResultContext.Provider value={{moviesSearchResult, setMoviesSearchResult}}>
     <SearchedContext.Provider value = {{searched, setSearched}}>
+    <IsLoadingContext.Provider value = {{isLoading, setIsLoading}}>
       <div className="app">
         <Routes>
           <Route path="/" element={
@@ -175,7 +181,6 @@ function App() {
                             saveMovie={saveMovie}
                             deleteMovie={deleteMovie}
                             savedMovies={savedMovies}
-                            isLoading={isLoading}
                             searchData={searchData} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
@@ -187,7 +192,6 @@ function App() {
                             formData={formData}
                             deleteMovie={deleteMovie}
                             savedMovies={savedMovies}
-                            isLoading={isLoading}
                             searchData={searchData} /> }/>
           <Route path="/profile" element={
             <ProtectedRoute element={Profile}
@@ -204,6 +208,7 @@ function App() {
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>
+    </IsLoadingContext.Provider>
     </SearchedContext.Provider>
     </MoviesSearchResultContext.Provider>
     </MoviesListContext.Provider>

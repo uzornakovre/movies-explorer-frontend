@@ -12,7 +12,6 @@ function SavedMovies({ isBurgerMenuOpen,
                        formData,
                        savedMovies,
                        deleteMovie,
-                       isLoading,
                        searchData
                      }) {
   return (
@@ -30,8 +29,7 @@ function SavedMovies({ isBurgerMenuOpen,
                     searchData={searchData} />
         <MoviesCardList page="savedMovies"
                         savedMovies={savedMovies}
-                        deleteMovie={deleteMovie}
-                        isLoading={isLoading} />
+                        deleteMovie={deleteMovie} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}

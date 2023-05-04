@@ -14,7 +14,6 @@ function Movies({ onBurgerClick,
                   saveMovie,
                   deleteMovie,
                   savedMovies,
-                  isLoading,
                   searchData
                 }) {
   const [moviesQuantity, setMoviesQuantity] = useState(12);
@@ -40,8 +39,7 @@ function Movies({ onBurgerClick,
                         onMoreClick={increaseMoviesQuantity}
                         saveMovie={saveMovie}
                         deleteMovie={deleteMovie}
-                        savedMovies={savedMovies} 
-                        isLoading={isLoading} />
+                        savedMovies={savedMovies} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}
