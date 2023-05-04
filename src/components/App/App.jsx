@@ -21,15 +21,24 @@ import { IsLoadingContext }          from '../../contexts/IsLoadingContext';
 import ProtectedRoute                from '../../utils/ProtectedRoute';
 
 function App() {
+  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
+  const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { result: [] };
+
   const [isBurgerMenuOpen,   setBurgerMenuOpen    ] = useState(false);
   const [loggedIn,           setLoggedIn          ] = useState(false);
   const [currentUser,        setCurrentUser       ] = useState({});
   const [moviesList,         setMoviesList        ] = useState([]);
-  const [moviesSearchResult, setMoviesSearchResult] = useState([]);
   const [savedMovies,        setSavedMovies       ] = useState([]);
   const [isLoading,          setIsLoading         ] = useState(false);
-  const [searched,           setSearched          ] = useState({ movies: false,
-                                                                 savedMovies: false });
+  const [searched,           setSearched          ] = useState({
+    movies: false,
+    savedMovies: false 
+  });
+  const [moviesSearchResult, setMoviesSearchResult] = useState({
+    movies: moviesSearchData.result || [],
+    savedMovies: savedMoviesSearchData.result || [],
+    filteredMoviesList: moviesSearchData.filteredMoviesList || []
+  });                                                                 
 
   const formData   = useFormData();
   const navigate   = useNavigate();
@@ -108,6 +117,7 @@ function App() {
   // Обновление данных о пользователе
 
   function handleUpdateUser(userData) {
+    setIsLoading(true);
     mainApi.updateUserInfo(userData, jwt)
       .then((newUserData) => {
         setCurrentUser(newUserData);
@@ -116,6 +126,9 @@ function App() {
       .catch((error) => {
         console.log(`Ошибка при изменении данных о пользователе: ${error}`);
       })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   // Сохранение и удаление фильмов

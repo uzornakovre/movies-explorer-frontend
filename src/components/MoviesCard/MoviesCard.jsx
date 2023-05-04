@@ -1,26 +1,32 @@
 import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
+// import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
-function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
+function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }) {
+  // const { isLoading } = useContext(IsLoadingContext);
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
   const [currentMovie] = useState(
     savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN)
-  ); 
+  );
 
-  useState(() => {
+  function log() {
+    console.log(currentMovie);
+  }
+
+  useEffect(() => {
     if (page === 'movies' && currentMovie) {
       const isMovieSaved = savedMovies.some(movie => movie._id === currentMovie._id);
       setIsMovieSaved(isMovieSaved);
     }
-  }, [savedMovies]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleSaveClick() {
-    console.log(currentMovie);
     if (!isMovieSaved) {
-      saveMovie(card);
       setIsMovieSaved(true);
+      saveMovie(card);
     } else {
       deleteMovie(currentMovie);
       setIsMovieSaved(false);
@@ -40,7 +46,6 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
     if (page === 'savedMovies') {
         setButtonContent(<img src={removeIcon} alt="Фильм добавлен" />)
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMovieSaved]);
 
@@ -51,7 +56,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
   let duration = card.duration + ' ' + declOfNum(card.duration, ['минута', 'минуты', 'минут']);
 
   return (
-    <article className="movies-card">
+    <article className="movies-card" onClick={log}>
       <div className="movies-card__heading">
         <h3 className="movies-card__title">{card.nameRU}</h3>
         <p className="movies-card__duration">{duration}</p>

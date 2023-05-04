@@ -3,7 +3,7 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Menu from '../Menu/Menu';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Movies({ onBurgerClick,
                   isBurgerMenuOpen,
@@ -16,11 +16,39 @@ function Movies({ onBurgerClick,
                   savedMovies,
                   searchData
                 }) {
+
+  //  Количество отображаемых фильмов на странице
   const [moviesQuantity, setMoviesQuantity] = useState(12);
 
-  function increaseMoviesQuantity() {
-    setMoviesQuantity(moviesQuantity + 3);
+  function handleChangeWidth() {
+    if (window.innerWidth <= 767) {
+      setMoviesQuantity(5);
+    } else if (window.innerWidth <= 1023) {
+      setMoviesQuantity(8);
+    } else {
+      setMoviesQuantity(12);
+    }
   }
+
+  function increaseMoviesQuantity() {
+    if (window.innerWidth > 1023) {
+      setMoviesQuantity(moviesQuantity + 3);
+    } else setMoviesQuantity(moviesQuantity + 2);
+  }
+
+  useEffect(() => {
+    let timeout;
+
+    function handleChangeWithTimeout() {
+      timeout = setTimeout(handleChangeWidth, 1000);
+    };
+
+    window.addEventListener("resize", handleChangeWithTimeout);
+    return () => {
+      window.removeEventListener("resize", handleChangeWithTimeout);
+      clearTimeout(timeout);
+    };
+  });
 
   return (
     <>

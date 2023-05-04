@@ -8,11 +8,10 @@ function SearchForm({ moviesQuantity,
                       formData,
                       page,
                       savedMovies,
-                      searchData
                     }) {
   const moviesList = useContext(MoviesListContext);
   const { searched, setSearched } = useContext(SearchedContext);
-  const { setMoviesSearchResult } = useContext(MoviesSearchResultContext);
+  const { moviesSearchResult, setMoviesSearchResult } = useContext(MoviesSearchResultContext);
   const shortsRef = useRef();
   let filteredMoviesList = [];
 
@@ -20,19 +19,19 @@ function SearchForm({ moviesQuantity,
     movies: {
       input: '',
       result: [],
+      filtered: [],
       filterShorts: false
     },
     savedMovies: {
       input: '',
       result: [],
+      filtered: [],
       filterShorts: false
     }
   };
 
-  // localStorage.setItem('moviesSearchData', JSON.stringify(data.movies));
-
   function filterByName(name, list, page) {
-    data[page] = {...data[page], input: name};
+    data[page] = {...data[page], input: name, result: list};
     filteredMoviesList = list.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(name) || movie.nameEN.toLowerCase().includes(name);
     });
@@ -55,12 +54,17 @@ function SearchForm({ moviesQuantity,
       result.push(filteredMoviesList[i]);
     }
 
-    setMoviesSearchResult(result);
-    data[page] = {...data[page], result: result};
+    setMoviesSearchResult({ ...moviesSearchResult, [page]: result, filteredMoviesList: filteredMoviesList });
+    // data[page] = {...data[page], result: result};
+    data[page] = {...data[page], filtered: filteredMoviesList};
   }
 
   function renderCards(page) {
-    setMoviesSearchResult([]);
+    // setMoviesSearchResult({ 
+    //   movies: [],
+    //   savedMovies: [],
+    //   ...filteredMoviesList 
+    // });
 
     if (page === 'movies') {
       filterByName(formData.values.search, moviesList, page);
@@ -73,25 +77,31 @@ function SearchForm({ moviesQuantity,
     createResult(page);
   }
 
-  function handleSearchSubmit(evt) {
-    evt.preventDefault();
-    renderCards(page);
-
+  function storeData() {
     if (page === 'movies') {
       localStorage.setItem('moviesSearchData', JSON.stringify(data.movies));
     }
     if (page === 'savedMovies') {
       localStorage.setItem('savedMoviesSearchData', JSON.stringify(data.savedMovies));
     }
+  }
 
+  function handleSearchSubmit(evt) {
+    evt.preventDefault();
+    renderCards(page);
+    storeData();
     setSearched({ ...searched, [page]: true });
   }
 
   useEffect(() => {
     renderCards(page);
+    // if (data.movies.result.length > 0) {
+    //   storeData();
+    // }
   }, [moviesQuantity]);
 
   useEffect(() => {
+    console.log(moviesSearchResult);
     const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { input: '' };
     const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { input: '' };
     
