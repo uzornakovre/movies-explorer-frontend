@@ -31,10 +31,6 @@ function MoviesCardList({ page,
     );
   }
 
-  // useEffect(() => {
-  //   setSavedMoviesCardElements(() => savedMovies.map(moviesCard => renderCard(moviesCard)));
-  // }, [savedMovies]);
-
   useEffect(() => {
     if (searched.movies) {
       setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
@@ -56,7 +52,8 @@ function MoviesCardList({ page,
         {page === 'savedMovies' && savedMoviesCardElements}
       </ul>
       {(moviesSearchResult.filteredMoviesList.length > 12 &&
-        moviesCardElements.length !== 0) && 
+        moviesCardElements.length !== 0 && 
+        moviesCardElements.length < moviesSearchResult.filteredMoviesList.length) && 
         <button className={`movies__load-more movies__load-more_page_${page}`}
                 type="button"
                 onClick={onMoreClick}>Ещё</button>

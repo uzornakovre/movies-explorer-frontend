@@ -8,6 +8,7 @@ function SearchForm({ moviesQuantity,
                       formData,
                       page,
                       savedMovies,
+                      searchData
                     }) {
   const moviesList = useContext(MoviesListContext);
   const { searched, setSearched } = useContext(SearchedContext);
@@ -16,20 +17,7 @@ function SearchForm({ moviesQuantity,
   const shortsRef = useRef();
   let filteredMoviesList = [];
 
-  let data = {
-    movies: {
-      input: '',
-      result: [],
-      filtered: [],
-      filterShorts: false
-    },
-    savedMovies: {
-      input: '',
-      result: [],
-      filtered: [],
-      filterShorts: false
-    }
-  };
+  let data = { movies: searchData, savedMovies: searchData };
 
   function filterByName(name, list, page) {
     data[page] = {...data[page], input: name, result: list};
