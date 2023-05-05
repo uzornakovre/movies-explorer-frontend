@@ -11,7 +11,6 @@ function MoviesCardList({ page,
                           saveMovie,
                           deleteMovie,
                           savedMovies,
-                          moviesQuantity
                         }) {
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const { isLoading } = useContext(IsLoadingContext);
@@ -32,9 +31,9 @@ function MoviesCardList({ page,
     );
   }
 
-  useEffect(() => {
-    setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
-  }, [savedMovies]);
+  // useEffect(() => {
+  //   setSavedMoviesCardElements(() => savedMovies.map(moviesCard => renderCard(moviesCard)));
+  // }, [savedMovies]);
 
   useEffect(() => {
     if (searched.movies) {
@@ -42,8 +41,10 @@ function MoviesCardList({ page,
     }
     if (searched.savedMovies) {
       setSavedMoviesCardElements(moviesSearchResult.savedMovies.map(moviesCard => renderCard(moviesCard)));
+    } else if (!searched.savedMovies) {
+      setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
     }
-  }, [moviesSearchResult]);
+  }, [moviesSearchResult, savedMovies]);
 
   return (
     <section className="movies" aria-label="Фильмы">

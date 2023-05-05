@@ -1,34 +1,25 @@
 import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
-// import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
 function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }) {
-  // const { isLoading } = useContext(IsLoadingContext);
   const [isMovieSaved, setIsMovieSaved] = useState(false);
   const [buttonContent, setButtonContent] = useState('Сохранить');
-  const [currentMovie, setCurrentMovie] = useState(
-    savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN)
-  );
-
-  function log() {
-    console.log(currentMovie);
-  }
+  const [currentMovie] = useState(savedMovies.find(movie => movie.movieId === card.id));
 
   useEffect(() => {
     if (page === 'movies' && currentMovie) {
-      const isMovieSaved = savedMovies.some(movie => movie._id === currentMovie._id);
-      setIsMovieSaved(isMovieSaved);
+      setIsMovieSaved(() => savedMovies.some(movie => movie._id === currentMovie._id));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentMovie]);
 
   function handleSaveClick() {
     if (!isMovieSaved) {
       setIsMovieSaved(true);
       saveMovie(card);
     } else {
-      deleteMovie(currentMovie);
+      deleteMovie(card);
       setIsMovieSaved(false);
     }
   }
@@ -38,7 +29,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
   }
 
   useEffect(() => {
-    setCurrentMovie(savedMovies.find(movie => movie.nameRU === card.nameRU || movie.nameEN === card.nameEN));
+    // setCurrentMovie(savedMovies.find(movie => movie.movieId === card.id));
     
     if (page === 'movies') {
       if (isMovieSaved) {
@@ -49,7 +40,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
         setButtonContent(<img src={removeIcon} alt="Фильм добавлен" />)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMovieSaved]);
+  }, [isMovieSaved, savedMovies]);
 
   function declOfNum(number, words) {  
     return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? Math.abs(number) % 10 : 5]];
@@ -58,7 +49,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
   let duration = card.duration + ' ' + declOfNum(card.duration, ['минута', 'минуты', 'минут']);
 
   return (
-    <article className="movies-card" onClick={log}>
+    <article className="movies-card">
       <div className="movies-card__heading">
         <h3 className="movies-card__title">{card.nameRU}</h3>
         <p className="movies-card__duration">{duration}</p>

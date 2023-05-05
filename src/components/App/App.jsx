@@ -46,6 +46,7 @@ function App() {
   const searchData = {
     input: '',
     result: [],
+    filtered: [],
     filterShorts: false
   }
 
@@ -136,7 +137,7 @@ function App() {
   function saveMovie(movieData) {
     mainApi.saveMovie(movieData, jwt)
       .then((savedMovie) => {
-        setSavedMovies([savedMovie, ...savedMovies]);
+        setSavedMovies((state) => [savedMovie, ...state]);
       })
       .catch((error) => {
         console.log(`Ошибка при сохраниении фильма: ${error}`);
@@ -144,9 +145,15 @@ function App() {
   }
 
   function deleteMovie(movie) {
-    mainApi.deleteMovie(movie._id, jwt)
+    let id;
+
+    if (!movie._id) {
+      id = savedMovies.find(mov => mov.movieId === movie.id)._id;
+    } else id = movie._id;
+
+    mainApi.deleteMovie(id, jwt)
       .then(() => {
-        setSavedMovies((state) => state.filter((mov) => mov._id !== movie._id));
+        setSavedMovies((state) => state.filter((mov) => mov._id !== id));
       })
       .catch((error) => {
         console.log(`Ошибка при удалении фильма: ${error}`);
