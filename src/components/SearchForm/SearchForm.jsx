@@ -22,7 +22,8 @@ function SearchForm({ moviesQuantity,
   function filterByName(name, list, page) {
     data[page] = {...data[page], input: name, result: list};
     filteredMoviesList = list.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(name) || movie.nameEN.toLowerCase().includes(name);
+      return movie.nameRU.toLowerCase().includes(name.toLowerCase()) || 
+        movie.nameEN.toLowerCase().includes(name.toLowerCase());
     });
   }
 
