@@ -6,7 +6,14 @@ function useFormValues() {
   const [isValid, setIsValid] = useState(false);
 
   function handleChange(evt) {
-    const { value, name } = evt.target;
+    const form = evt.target;
+    const { value, name, type } = form;
+    const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+
+    if (type === 'email') {
+      const errorEmail = value.match(regexEmail) ? '' : 'Необходимо ввести email в формате email@username.domain'
+      form.setCustomValidity(errorEmail);
+    }
 
     setValues({
       ...values,

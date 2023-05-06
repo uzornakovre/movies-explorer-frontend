@@ -21,8 +21,7 @@ import { IsLoadingContext }          from '../../contexts/IsLoadingContext';
 import ProtectedRoute                from '../../utils/ProtectedRoute';
 
 function App() {
-  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [] };
-  const savedMoviesSearchData = JSON.parse(localStorage.getItem('savedMoviesSearchData')) || { result: [] };
+  const moviesSearchData = JSON.parse(localStorage.getItem('moviesSearchData')) || { result: [], filtered: [] };
 
   const [isBurgerMenuOpen,   setBurgerMenuOpen    ] = useState(false);
   const [loggedIn,           setLoggedIn          ] = useState(false);
@@ -36,7 +35,7 @@ function App() {
   });
   const [moviesSearchResult, setMoviesSearchResult] = useState({
     movies: moviesSearchData.result || [],
-    savedMovies: savedMoviesSearchData.result || [],
+    savedMovies: [],
     filteredMoviesList: moviesSearchData.filtered || []
   });
   
@@ -88,10 +87,11 @@ function App() {
   useEffect(() => {
     tokenCheck();
     if (loggedIn) {
-      Promise.all([mainApi.getCurrentUser(jwt), moviesApi.getMoviesList()])
-      .then(([userData, movies]) => {
+      Promise.all([mainApi.getCurrentUser(jwt), moviesApi.getMoviesList(), mainApi.getMovies(jwt)])
+      .then(([userData, movies, savedMovies]) => {
         setCurrentUser(userData);
         setMoviesList(movies);
+        setSavedMovies(savedMovies);
       })
       .catch((error) => {
         console.log('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
@@ -99,21 +99,6 @@ function App() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedIn]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    mainApi.getMovies(jwt)
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
-      .catch((error) => {
-        console.log(`Ошибка при получении фильмов: ${error}`);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // Обновление данных о пользователе
 
@@ -201,7 +186,8 @@ function App() {
                             saveMovie={saveMovie}
                             deleteMovie={deleteMovie}
                             savedMovies={savedMovies}
-                            searchData={searchData} /> }/>
+                            searchData={searchData}
+                            moviesSearchData={moviesSearchData} /> }/>
           <Route path="/saved-movies" element={
             <ProtectedRoute element={SavedMovies}
                             isBurgerMenuOpen={isBurgerMenuOpen}

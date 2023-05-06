@@ -14,7 +14,8 @@ function Movies({ onBurgerClick,
                   saveMovie,
                   deleteMovie,
                   savedMovies,
-                  searchData
+                  searchData,
+                  moviesSearchData
                 }) {
 
   //  Количество отображаемых фильмов на странице
@@ -68,7 +69,8 @@ function Movies({ onBurgerClick,
                         saveMovie={saveMovie}
                         deleteMovie={deleteMovie}
                         savedMovies={savedMovies}
-                        moviesQuantity={moviesQuantity} />
+                        moviesQuantity={moviesQuantity}
+                        moviesSearchData={moviesSearchData} />
       </main>
       <Footer />
       <Menu isOpen={isBurgerMenuOpen}

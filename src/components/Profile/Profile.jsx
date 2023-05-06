@@ -21,12 +21,18 @@ function Profile({ isBurgerMenuOpen,
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
+    if (currentUser.email !== formData.values.email || currentUser.name !== formData.values.name) {
       handleUpdateUser({
         name: formData.values.name,
         email: formData.values.email
       });
       setErrorToolTip('Данные успешно обновлены');
-      setButtonEditState(false);
+    } else {
+      setErrorToolTip('Необходимо изменить хотя бы одно поле');
+    }
+
+    setButtonEditState(false);
   }
 
   function handleInputClick() {

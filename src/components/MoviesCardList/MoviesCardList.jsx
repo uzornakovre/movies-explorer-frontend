@@ -11,7 +11,8 @@ function MoviesCardList({ page,
                           saveMovie,
                           deleteMovie,
                           savedMovies,
-                        }) {
+                          moviesSearchData
+                        }) {                    
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const { isLoading } = useContext(IsLoadingContext);
   const { searched } = useContext(SearchedContext);
@@ -37,10 +38,16 @@ function MoviesCardList({ page,
     }
     if (searched.savedMovies) {
       setSavedMoviesCardElements(moviesSearchResult.savedMovies.map(moviesCard => renderCard(moviesCard)));
-    } else if (!searched.savedMovies) {
+    } else {
       setSavedMoviesCardElements(savedMovies.map(moviesCard => renderCard(moviesCard)));
     }
   }, [moviesSearchResult, savedMovies]);
+
+  useEffect(() => {
+    if (moviesSearchData) {
+      setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
+    }
+  }, []);
 
   return (
     <section className="movies" aria-label="Фильмы">
