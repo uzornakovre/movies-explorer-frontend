@@ -29,6 +29,7 @@ function App() {
   const [moviesList,         setMoviesList        ] = useState([]);
   const [savedMovies,        setSavedMovies       ] = useState([]);
   const [isLoading,          setIsLoading         ] = useState(false);
+  const [errorToolTip,       setErrorToolTip      ] = useState('Измените данные и нажмите "Редактировать"');
   const [searched,           setSearched          ] = useState({
     movies: false,
     savedMovies: false 
@@ -60,6 +61,7 @@ function App() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('moviesSearchData');
     localStorage.removeItem('savedMoviesSearchData');
+    setSearched({ movies: false, savedMovies: false });
     navigate('/', {replace: true});
   }
 
@@ -106,8 +108,11 @@ function App() {
     setIsLoading(true);
     mainApi.updateUserInfo(userData, jwt)
       .then((newUserData) => {
-        setCurrentUser(newUserData);
-        navigate('/profile', {replace: true});
+        if (!newUserData.error && !newUserData.message) {
+          setCurrentUser(newUserData);
+          navigate('/profile', {replace: true});
+          setErrorToolTip('Данные успешно обновлены');
+        } else setErrorToolTip(newUserData.message);
       })
       .catch((error) => {
         console.log(`Ошибка при изменении данных о пользователе: ${error}`);
@@ -208,9 +213,15 @@ function App() {
                             loggedIn={loggedIn}
                             handleLogout={handleLogout}
                             formData={formData}
-                            handleUpdateUser={handleUpdateUser} /> }/>
-          <Route path="/signin" element={<Login formData={formData} handleLogin={handleLogin} />}/>
-          <Route path="/signup" element={<Register formData={formData} />}/>
+                            handleUpdateUser={handleUpdateUser}
+                            errorToolTip={errorToolTip}
+                            setErrorToolTip={setErrorToolTip} /> }/>
+          <Route path="/signin" element={<Login formData={formData}
+                                                handleLogin={handleLogin}
+                                                loggedIn={loggedIn} />}/>
+          <Route path="/signup" element={<Register formData={formData} 
+                                                   handleLogin={handleLogin}
+                                                   loggedIn={loggedIn} />}/>
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </div>

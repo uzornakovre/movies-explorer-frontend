@@ -32,7 +32,7 @@ class Api {
         name:  userData.name,
         email: userData.email
       })
-    }).then(this._checkStatus);
+    }).then(res => res.json()); 
   }
 
   getMovies(token) {

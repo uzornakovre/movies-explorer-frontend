@@ -16,7 +16,6 @@ function SearchForm({ moviesQuantity,
   const [searchError, setSearchError] = useState(false);
   const shortsRef = useRef();
   let filteredMoviesList = [];
-
   let data = { movies: searchData, savedMovies: searchData };
 
   function filterByName(name, list, page) {
@@ -65,9 +64,6 @@ function SearchForm({ moviesQuantity,
     if (page === 'movies') {
       localStorage.setItem('moviesSearchData', JSON.stringify(data.movies));
     }
-    // if (page === 'savedMovies') {
-    //   localStorage.setItem('savedMoviesSearchData', JSON.stringify(data.savedMovies));
-    // }
   }
 
   function handleSearchSubmit(evt) {

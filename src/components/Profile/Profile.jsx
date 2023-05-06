@@ -11,27 +11,21 @@ function Profile({ isBurgerMenuOpen,
                    loggedIn,
                    handleLogout,
                    handleUpdateUser,
-                   formData
+                   formData,
+                   errorToolTip,
+                   setErrorToolTip
                  }) {
 
   const currentUser = useContext(CurrentUserContext);
   const { isLoading } = useContext(IsLoadingContext);
-  const [errorToolTip, setErrorToolTip] = useState('Измените данные и нажмите "Редактировать"');
   const [buttonEditState, setButtonEditState] = useState(true);
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
-    if (currentUser.email !== formData.values.email || currentUser.name !== formData.values.name) {
-      handleUpdateUser({
-        name: formData.values.name,
-        email: formData.values.email
-      });
-      setErrorToolTip('Данные успешно обновлены');
-    } else {
-      setErrorToolTip('Необходимо изменить хотя бы одно поле');
-    }
-
+    handleUpdateUser({
+      name: formData.values.name,
+      email: formData.values.email
+    });
     setButtonEditState(false);
   }
 
@@ -101,7 +95,8 @@ function Profile({ isBurgerMenuOpen,
               ${errorToolTip === "Данные успешно обновлены" && "profile__error-tool-tip_success"}`}>{errorToolTip}</span>
             <button className={`profile__button profile__button_type_edit`}
                     type="submit"
-                    disabled={!formData.isValid || !buttonEditState}>
+                    disabled={(currentUser.email === formData.values.email && currentUser.name === formData.values.name) || 
+                    !formData.isValid || !buttonEditState}>
                       {isLoading && '...'}{!isLoading && 'Редактировать'}</button>
             <button className="profile__button profile__button_type_logout"
                     type="button"

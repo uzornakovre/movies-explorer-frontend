@@ -1,10 +1,10 @@
 import AuthForm from '../AuthForm/AuthForm';
 import { auth } from '../../utils/Auth';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
-function Login({ formData, handleLogin }) {
+function Login({ formData, handleLogin, loggedIn }) {
   const { isLoading, setIsLoading } = useContext(IsLoadingContext);
   const [errorToolTip, setErrorToolTip] = useState('');
   const navigate = useNavigate();
@@ -16,15 +16,10 @@ function Login({ formData, handleLogin }) {
     auth.login(formData.values.email, formData.values.password)
       .then((res) => {
         localStorage.setItem('jwt', res.token);
-        formData.setValues({
-          email:    '',
-          password: '',
-          name:     ''
-        })
         handleLogin();
         navigate('/movies', {replace: true});
       })
-      .catch((error) =>{
+      .catch((error) => {
         setErrorToolTip('Неверный логин или пароль.');
         console.log(error);
       })
@@ -32,6 +27,15 @@ function Login({ formData, handleLogin }) {
         setIsLoading(false);
       })
   }
+
+  useEffect(() => {
+    formData.resetFormValues();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (loggedIn) navigate('/movies', {replace: true});
+  });
 
   return (
     <AuthForm type="signin"
