@@ -2,17 +2,17 @@ import checkMark from '../../images/check_mark.svg';
 import removeIcon from '../../images/remove_icon.svg';
 import { useState, useEffect } from 'react';
 
-function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }) {
-  const [isMovieSaved, setIsMovieSaved] = useState(false);
+function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies }) {
   const [buttonContent, setButtonContent] = useState('Сохранить');
-  const [currentMovie] = useState(savedMovies.find(movie => movie.movieId === card.id));
+  const [currentMovie, setCurrentMovie] = useState(savedMovies.find(movie => movie.movieId === card.id));
+  const [isMovieSaved, setIsMovieSaved] = useState(false);
 
   useEffect(() => {
     if (page === 'movies' && currentMovie) {
-      setIsMovieSaved(() => savedMovies.some(movie => movie._id === currentMovie._id));
+      setIsMovieSaved(savedMovies.some(movie => movie._id === currentMovie._id));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentMovie]);
+  }, [currentMovie, savedMovies]);
 
   function handleSaveClick() {
     if (!isMovieSaved) {
@@ -29,8 +29,7 @@ function MoviesCard({ card, page, saveMovie, deleteMovie, savedMovies, movieId }
   }
 
   useEffect(() => {
-    // setCurrentMovie(savedMovies.find(movie => movie.movieId === card.id));
-    
+    setCurrentMovie(savedMovies.find(movie => movie.movieId === card.id));
     if (page === 'movies') {
       if (isMovieSaved) {
         setButtonContent(<img src={checkMark} alt="Фильм добавлен" />)

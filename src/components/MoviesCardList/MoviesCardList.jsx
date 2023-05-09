@@ -47,7 +47,7 @@ function MoviesCardList({ page,
     if (moviesSearchData) {
       setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
     }
-  }, []);
+  }, [savedMovies]);
 
   return (
     <section className="movies" aria-label="Фильмы">
