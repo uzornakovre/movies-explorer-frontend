@@ -8,7 +8,7 @@ function useFormValues() {
   function handleChange(evt) {
     const form = evt.target;
     const { value, name, type } = form;
-    const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+    const regexEmail = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i;
 
     if (type === 'email') {
       const errorEmail = value.match(regexEmail) ? '' : 'Необходимо ввести email в формате email@username.domain'
