@@ -33,6 +33,9 @@ function MoviesCardList({ page,
   }
 
   useEffect(() => {
+    if (moviesSearchData) {
+      setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
+    }
     if (searched.movies) {
       setMoviesCardElements(moviesSearchResult.movies.map(moviesCard => renderCard(moviesCard)));
     }
@@ -43,11 +46,11 @@ function MoviesCardList({ page,
     }
   }, [moviesSearchResult, savedMovies]);
 
-  useEffect(() => {
-    if (moviesSearchData) {
-      setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
-    }
-  }, [savedMovies]);
+  // useEffect(() => {
+  //   if (moviesSearchData) {
+  //     setMoviesCardElements(moviesSearchData.filtered.map(moviesCard => renderCard(moviesCard)));
+  //   }
+  // }, [savedMovies]);
 
   return (
     <section className="movies" aria-label="Фильмы">
