@@ -10,8 +10,7 @@ function MoviesCardList({ page,
                           onMoreClick,
                           saveMovie,
                           deleteMovie,
-                          savedMovies,
-                          moviesSearchData
+                          savedMovies
                         }) {                    
   const { moviesSearchResult } = useContext(MoviesSearchResultContext);
   const { isLoading } = useContext(IsLoadingContext);
