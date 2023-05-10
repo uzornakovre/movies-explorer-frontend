@@ -78,6 +78,12 @@ function SearchForm({ moviesQuantity,
     }
   }
 
+  function toggleShortsFilter() {
+    renderCards(page);
+    storeData();
+    setSearched({ ...searched, [page]: true });
+  }
+
   useEffect(() => {
     renderCards(page);
   }, [moviesQuantity]);
@@ -118,6 +124,7 @@ function SearchForm({ moviesQuantity,
                  id="filter-checkbox"
                  name="shorts"
                  ref={shortsRef}
+                 onChange={toggleShortsFilter}
                  defaultChecked></input>
           <label className="search-form__filter-item" htmlFor="filter-checkbox">Короткометражки</label>
         </fieldset>
