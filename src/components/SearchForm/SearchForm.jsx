@@ -79,9 +79,11 @@ function SearchForm({ moviesQuantity,
   }
 
   function toggleShortsFilter() {
-    renderCards(page);
-    storeData();
-    setSearched({ ...searched, [page]: true });
+    if (page === 'saved-movies' || (page === 'movies' && formData.values.search !== '')) {
+      renderCards(page);
+      storeData();
+      setSearched({ ...searched, [page]: true });
+    }
   }
 
   useEffect(() => {
