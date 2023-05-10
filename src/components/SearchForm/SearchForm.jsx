@@ -19,7 +19,7 @@ function SearchForm({ moviesQuantity,
   let data = { movies: searchData, savedMovies: searchData };
 
   function filterByName(name, list, page) {
-    data[page] = {...data[page], input: name, result: list};
+    data[page] = {...data[page], input: name };
     filteredMoviesList = list.filter((movie) => {
       return name ? movie.nameRU.toLowerCase().includes(name.toLowerCase()) || 
         movie.nameEN.toLowerCase().includes(name.toLowerCase()) : [];
@@ -44,7 +44,7 @@ function SearchForm({ moviesQuantity,
     }
 
     setMoviesSearchResult({ ...moviesSearchResult, [page]: result, filteredMoviesList: filteredMoviesList });
-    data[page] = {...data[page], filtered: filteredMoviesList};
+    data[page] = {...data[page], filtered: filteredMoviesList, result: result};
   }
 
   function renderCards(page) {

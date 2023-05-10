@@ -3,7 +3,9 @@ import Footer from '../Footer/Footer';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Menu from '../Menu/Menu';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { SearchedContext } from '../../contexts/SearchedContext';
+import { MoviesSearchResultContext } from "../../contexts/MoviesSearchResultContext";
 
 function Movies({ onBurgerClick,
                   isBurgerMenuOpen,
@@ -17,6 +19,9 @@ function Movies({ onBurgerClick,
                   searchData,
                   moviesSearchData
                 }) {
+
+  const { setSearched } = useContext(SearchedContext);
+  const { moviesSearchResult, setMoviesSearchResult } = useContext(MoviesSearchResultContext);
 
   //  Количество отображаемых фильмов на странице
   const [moviesQuantity, setMoviesQuantity] = useState(12);
@@ -50,6 +55,18 @@ function Movies({ onBurgerClick,
       clearTimeout(timeout);
     };
   });
+
+  useEffect(() => {
+    setSearched({ movies: false, savedMovies: false});
+    setMoviesQuantity(12);
+    if (moviesSearchData) {
+      setMoviesSearchResult({ 
+        ...moviesSearchResult, 
+        movies: moviesSearchData.result,
+        filteredMoviesList: moviesSearchData.filtered })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>

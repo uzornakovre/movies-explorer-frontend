@@ -3,6 +3,8 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Menu from '../Menu/Menu';
+import { SearchedContext } from '../../contexts/SearchedContext';
+import { useEffect, useContext } from 'react';
 
 function SavedMovies({ isBurgerMenuOpen,
                        onBurgerClick,
@@ -14,6 +16,14 @@ function SavedMovies({ isBurgerMenuOpen,
                        deleteMovie,
                        searchData
                      }) {
+
+  const { setSearched } = useContext(SearchedContext);
+
+  useEffect(() => {
+    setSearched({ movies: false, savedMovies: false});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Header page="savedMovies"

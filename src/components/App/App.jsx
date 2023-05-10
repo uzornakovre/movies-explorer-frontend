@@ -36,7 +36,7 @@ function App() {
   });
   const [moviesSearchResult, setMoviesSearchResult] = useState({
     movies: moviesSearchData.result || [],
-    savedMovies: [],
+    savedMovies: savedMovies || [],
     filteredMoviesList: moviesSearchData.filtered || []
   });
   
