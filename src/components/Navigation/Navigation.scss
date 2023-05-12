@@ -7,7 +7,7 @@
     flex-direction: column;
     padding-top: 155px;
     padding-bottom: 92px;
-    height: 100vh;
+    height: 100%;
     justify-content: space-between;
 
     @media screen and (max-width: 767px) {
@@ -113,6 +113,15 @@
 
     &_active {
       font-weight: 500;
+      cursor: default;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &:active {
+        opacity: 1;
+      }
     }
 
     &_type_account {

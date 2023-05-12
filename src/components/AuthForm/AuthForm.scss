@@ -75,6 +75,10 @@
       border-color: #3456F3;
     }
 
+    &::placeholder {
+      opacity: .6;
+    }
+
     &_error {
       border-color: #EE3465;
 
@@ -92,6 +96,15 @@
     line-height: 12px;
     color: #EE3465;
     margin: 6px 0;
+  }
+
+  &__error-tool-tip {
+    display: block;
+    text-align: center;
+    min-height: 17px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #EE3465;
   }
 
   &__submit {
@@ -114,14 +127,14 @@
     }
 
     &_type_signup {
-      margin-top: 128px;
+      margin-top: calc(61px - 17px);
 
       @media screen and (max-width: 767px) {
         margin-top: 217px;
       }
     }
     &_type_signin {
-      margin-top: 197px;
+      margin-top: calc(197px - 17px);
 
       @media screen and (max-width: 767px) {
         margin-top: 286px;
@@ -136,7 +149,7 @@
       opacity: .6;
     }
 
-    &_disabled {
+    &:disabled {
       background-color: #A0A0A0;
       border: 1px solid #A0A0A0;
       opacity: .5;

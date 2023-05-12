@@ -57,6 +57,12 @@
     border-radius: 50px;
     background-color: transparent;
 
+    &:focus {
+      background-color: transparent;
+      outline: none;
+      border-color: #2BE080;
+    }
+
     &::placeholder {
       color: #A0A0A0;
     }
@@ -70,6 +76,16 @@
       font-size: 11px;
       line-height: 1.64;
     }
+  }
+
+  &__error {
+    position: absolute;
+    left: 50%;
+    top: 60px;
+    transform: translateX(-50%);
+    font-size: 11px;
+    line-height: 1.64;
+    color: #EE3465;
   }
 
   &__submit {

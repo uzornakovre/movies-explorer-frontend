@@ -1,5 +1,7 @@
 import AuthFormField from "./AuthFormField";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
 
 function AuthForm({ type,
                     title,
@@ -8,9 +10,12 @@ function AuthForm({ type,
                     tipButtonText,
                     tipLink,
                     formData,
+                    errorToolTip,
+                    handleSubmit,
                     children
                   }) {
 
+  const { isLoading } = useContext(IsLoadingContext);                    
   return (
     <div className="auth">
       <Link to="/" className="auth__to-startpage">
@@ -28,7 +33,7 @@ function AuthForm({ type,
         </svg>
       </Link>
       <h2 className="auth__title">{title}</h2>
-      <form className="auth__form" noValidate>
+      <form className="auth__form" onSubmit={handleSubmit} noValidate>
         { type === 'signup' && <AuthFormField type="text"
                                               name="userName"
                                               labelText="Имя"
@@ -52,9 +57,10 @@ function AuthForm({ type,
                        placeholder="Введите пароль"
         />
         {children}
-        <button className={`auth__submit auth__submit_type_${type} ${!formData.isValid && 'auth__submit_disabled'}`}
+        <span className="auth__error-tool-tip">{errorToolTip}</span>
+        <button className={`auth__submit auth__submit_type_${type}`}
                 type="submit"
-                disabled={!formData.isValid}>{submitText}</button>
+                disabled={!formData.isValid || isLoading}>{submitText}</button>
       </form>
       <p className="auth__tip">
         {tipText}&ensp;{<Link to={tipLink} className="auth__link">{tipButtonText}</Link>}

@@ -1,4 +1,9 @@
+import { useContext } from 'react';
+import { IsLoadingContext } from '../../contexts/IsLoadingContext';
+
 function AuthFormField({ labelText, name, type, formData, page, placeholder }) {
+  const { isLoading } = useContext(IsLoadingContext);
+
   return (
     <fieldset className="auth__form-fieldset">
       <label className="auth__form-label" htmlFor={`${page}_${name}`}>{labelText}</label>
@@ -14,6 +19,8 @@ function AuthFormField({ labelText, name, type, formData, page, placeholder }) {
              maxLength={40}
              required
              placeholder={placeholder}
+             autoComplete="on"
+             disabled={isLoading}
       ></input>
       <span className={`auth__form-input-error`}>{formData.errors[name]}</span>
     </fieldset>

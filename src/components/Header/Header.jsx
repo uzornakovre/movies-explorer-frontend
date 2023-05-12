@@ -1,7 +1,7 @@
 import Navigation from '../Navigation/Navigation';
 import { Link } from 'react-router-dom';
 
-function Header({ page, type, onBurgerClick, isBurgerMenuOpen }) {
+function Header({ page, type, onBurgerClick, isBurgerMenuOpen, loggedIn }) {
   return (
     <header className={`header header_page_${page}`}>
       <div className="header__content">
@@ -19,11 +19,11 @@ function Header({ page, type, onBurgerClick, isBurgerMenuOpen }) {
             13 19H15.1538Z" fill="inherit"/>
           </svg>         
         </Link>
-      <Navigation page={page}
-                  type={type}
-                  place="header"
-                  onBurgerClick={onBurgerClick}
-                  isBurgerMenuOpen={isBurgerMenuOpen} />
+        <Navigation type={type}
+                    loggedIn={loggedIn}
+                    place="header"
+                    onBurgerClick={onBurgerClick}
+                    isBurgerMenuOpen={isBurgerMenuOpen} />
       </div>
     </header>
   )

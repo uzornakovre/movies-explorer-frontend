@@ -1,73 +1,82 @@
 import Burger from "../Burger/Burger";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-function Navigation({ page,
-                      type, 
+function Navigation({ type, 
                       place, 
                       onBurgerClick, 
-                      isBurgerMenuOpen,
+                      loggedIn,
                       closeBurgerMenu
                     }) {
 
+  function navLinkDefaultClass({ isActive }) {
+    if (isActive) {
+      return "navigation__button navigation__button_active";
+    } else return "navigation__button";
+  }
+
   return (
     <nav className={`navigation navigation_type_${type} navigation_place_${place}`}>
-      {type === "logged-in" && 
+      {loggedIn && 
         <>
           <ul className={`navigation__menu navigation__menu_type_movies navigation__menu_place_${place}`}>
             {place === "burger" &&
               <li className="navigation__menu-item">
-                { <Link to="/" 
-                        className={`navigation__button`}
+                { <NavLink to="/" 
+                        className={navLinkDefaultClass}
                         onClick={closeBurgerMenu}>
                   Главная
-                  </Link> }
+                  </NavLink> }
               </li>
             }
             <li className="navigation__menu-item">
-              { <Link to="/movies" 
-                      className={`navigation__button navigation__button_${page === "movies" && "active"}`}
-                      onClick={closeBurgerMenu}>
+              { <NavLink to="/movies"
+                         className={navLinkDefaultClass}
+                         onClick={closeBurgerMenu}>
                 Фильмы
-                </Link> }
+                </NavLink> }
             </li>
             <li className="navigation__menu-item">
-              { <Link to="/saved-movies" 
-                      className={`navigation__button navigation__button_${page === "saved-movies" && "active"}`}
+              { <NavLink to="/saved-movies" 
+                      className={navLinkDefaultClass}
                       onClick={closeBurgerMenu}>
                   Сохранённые фильмы
-                </Link> }
+                </NavLink> }
             </li>
           </ul>
           <ul className={`navigation__menu navigation__menu_type_account navigation__menu_place_${place}`}>
             <li className="navigation__menu-item">
-              { <Link to="/profile"
-                      className={`navigation__button navigation__button_type_account`}
+              { <NavLink to="/profile"
+                      className={({ isActive }) =>
+                        isActive ? "navigation__button navigation__button_active navigation__button_type_account" :
+                        "navigation__button navigation__button_type_account"}
                       onClick={closeBurgerMenu}>
                   <p className="navigation__button-text">Аккаунт</p>
                   <div className="navigation__account-logo"></div>
-                </Link> }
+                </NavLink> }
             </li>
           </ul>
           {place !== "burger" && 
-            <Burger onBurgerClick={onBurgerClick} /> 
+            <Burger onBurgerClick={onBurgerClick} loggedIn={loggedIn} /> 
           }
         </>
       }
-      {type === "start-page" &&
+      {(type === "start-page" && !loggedIn) &&
         <ul className="navigation__menu navigation__menu_type_account">
           <li className="navigation__menu-item">
-            { <Link to="/signup" 
-                    className={`navigation__button navigation__button_${page === "" && "active"}`}
+            { <NavLink to="/signup" 
+                    className={navLinkDefaultClass}
                     onClick={closeBurgerMenu}>
               Регистрация
-              </Link> }
+              </NavLink> }
           </li>
           <li className="navigation__menu-item">
-            { <Link to="/signin" 
-                    className={`navigation__button navigation__button_${page === "" && "active"} navigation__button_type_login`}
+            { <NavLink to="/signin" 
+                    className={({ isActive }) =>
+                      isActive ? "navigation__button navigation__button_active navigation__button_type_login" :
+                      "navigation__button navigation__button_type_login"}
                     onClick={closeBurgerMenu}>
                 Войти
-              </Link> }
+              </NavLink> }
           </li>
         </ul>
       }

@@ -1,6 +1,6 @@
 import Navigation from "../Navigation/Navigation";
 
-function Menu({ isOpen, page, closeBurgerMenu, onOverlayClick }) {
+function Menu({ isOpen, closeBurgerMenu, onOverlayClick, loggedIn }) {
   return (
     <div className={`menu ${isOpen ? 'menu_opened' : ''}`}
          onMouseDown={onOverlayClick}>
@@ -10,7 +10,7 @@ function Menu({ isOpen, page, closeBurgerMenu, onOverlayClick }) {
       <div className={`menu__container ${isOpen ? 'menu__container_opened' : ''}`}>
         <Navigation type="logged-in"
                     place="burger"
-                    page={page}
+                    loggedIn={loggedIn}
                     closeBurgerMenu={closeBurgerMenu} />
       </div>
     </div>
