@@ -18,6 +18,7 @@ function MoviesCardList({ page,
   const [savedMoviesCardElements, setSavedMoviesCardElements] = useState([]);
   const [moviesCardElements, setMoviesCardElements] = useState([]);
   const notFoundError = (<span className="movies__error">Ничего не найдено</span>);
+  const initialToolTip = (<span className="movies__error movies__error_initial">Для поиска фильмов введите ключевое слово</span>);
 
   function renderCard(card) {
     return (
@@ -44,6 +45,7 @@ function MoviesCardList({ page,
   return (
     <section className="movies" aria-label="Фильмы">
       {(moviesSearchResult.movies.length === 0 && page === 'movies' && searched.movies) && notFoundError}
+      {(moviesSearchResult.movies.length === 0 && page === 'movies' && !searched.movies) && initialToolTip}
       {(moviesSearchResult.savedMovies.length === 0 && page === 'savedMovies' && searched.savedMovies) && notFoundError}
       {isLoading && <Preloader />}
       <ul className="movies__list">

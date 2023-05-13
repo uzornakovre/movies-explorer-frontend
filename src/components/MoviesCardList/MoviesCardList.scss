@@ -42,6 +42,10 @@
     display: block;
     color: #EE3465;
     text-align: center;
+
+    &_initial {
+      color: #3456F3;
+    }
   }
 
   &__load-more {
